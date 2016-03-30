@@ -116,9 +116,9 @@ componentDidMount() {
    
   render() {
 
-    let sides = 5;
+    let sides =6;
     let radius = 189;
-    let cradius = 165;
+    let cradius = 135;
 
     let a = ((Math.PI * 2)/sides);
     let arry = [];
@@ -138,7 +138,7 @@ componentDidMount() {
       <div >
         
         <div style= {{ position: 'relative' , top: '360px' , left: '-40px' , zIndex: '-10' }} >        
-          <Burfee vArray={ carry } opacity="1"  color="black" />
+          <Burfee vArray={ carry } opacity=".5"  color="black" />
         </div>
         
       </div>

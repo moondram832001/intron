@@ -98,10 +98,10 @@ render() {
         tempObject['pointThree'] = {x : vertices[2 * earres[i + 2]] , y : vertices[2 * earres[i + 2] + 1]};
         pointery.push(tempObject);
     }
-  //  pointery.splice(1,1);
+  // pointery.splice(1,1);
 
     console.log(vertices , pointery);
-   // pointery.pop(); pointery.pop();
+  //pointery.pop(); pointery.pop();
   
  //   console.log("pointery:", pointery);
 

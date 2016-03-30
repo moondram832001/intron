@@ -80,8 +80,7 @@ positionWrap : {
 },
 
 baseProps : {
-  width:'198px',
-  height:'198px',
+  
 //  background:   -webkit-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 90%,rgba(0,0,255,1) 98% , rgba(0,0,255,0) 100%) , 
 // -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 90%,rgba(0,0,255,1) 98% , rgba(0,0,255,0) 100%)   ,
   background: 'black',
@@ -91,33 +90,39 @@ baseProps : {
   left:'0px',
   opacity:'1',
   cursor: 'pointer',
-  border: '4px solid black',
-  outline: '0px solid black',
-  boxShadow: '0px 0px 0px #000'
+  
+  
 },
 
 divOne : {
+  width:'100px',
+  height:'100px',
   top:'0px',
   left:'0px',
   position:'absolute',
-  transformOrigin:'0% 0%'
+  transformOrigin:'0% 0%',
+ 
 },
 
 divTwo : {
+  width:'100px',
+  height:'100px',
   position:'absolute',
-  top:'200px',
+  top:'100px',
   left:'0px',
   transformOrigin: '0% 0%',
-  transform: 'skewY(-44.3deg)',
-  
+  transform: 'skewY(-45deg)',
 }, 
 
 divThree : {
+  width:'100px',
+  height:'100px',
   position:'absolute',
   top:'0px',
-  left:'200px',
+  left:'100px',
   transformOrigin: '0% 0%',
-  transform:'skewX(-44.3deg)'
+  transform:'skewX(-45deg)',
+  
 },
 
 wrapOne : {
@@ -190,12 +195,12 @@ render() {
  let { posX , posY , skewX , skewY , scaleX, scaleY , rotate , pointOne , pointTwo , pointThree } = this.props;
  
 
-pointOne.x = Math.round(pointOne.x) ;
-pointOne.y = Math.round(pointOne.y) ;
-pointTwo.x = Math.round(pointTwo.x) ;
-pointTwo.y = Math.round(pointTwo.y) ;
-pointThree.x = Math.round(pointThree.x) ;
-pointThree.y = Math.round(pointThree.y) ;
+// pointOne.x = Math.round(pointOne.x) ;
+// pointOne.y = Math.round(pointOne.y) ;
+// pointTwo.x = Math.round(pointTwo.x) ;
+// pointTwo.y = Math.round(pointTwo.y) ;
+// pointThree.x = Math.round(pointThree.x) ;
+// pointThree.y = Math.round(pointThree.y) ;
 
 //console.log(pointTwo);
 
@@ -285,21 +290,22 @@ pointThree.y = Math.round(pointThree.y) ;
  scaleY= '1';
  scaleX = longestLineSegment.length/282.843;
  scaleY = -pointPos * height/244.942 * Math.sqrt(3);
-  scaleX = longestLineSegment.length/570.686;
-  scaleY = -pointPos * height/493.894 * Math.sqrt(3);
+ //scaleX = longestLineSegment.length/281.043;
+ //scaleY = -pointPos * height/242.042  * Math.sqrt(3);
  // //rotate = '0deg';
  rotate = ang + 'deg';
 
  style.wrapTwo.transform = 'skewX('+ skewX + ') skewY('+ skewY + ') rotate(-45deg)' ;
  //console.log(style.wrapTwo , ang , skewX , adjLength , longestLineSegment.length,vecAngle , adjRatio , adjacentLength , sAngle + 'dege');
 
- //trianglePos.left = (longestLineSegment.pointOne.x) + 'px';
- //trianglePos.top = (longestLineSegment.pointOne.y) + 'px';
+ trianglePos.left = (longestLineSegment.pointOne.x) + 'px';
+ trianglePos.top = (longestLineSegment.pointOne.y) + 'px';
  let translateX = (longestLineSegment.pointOne.x)  + 'px';
  let translateY = (longestLineSegment.pointOne.y) + 'px';
 
- trianglePos.transformOrigin = ' ' + translateX + ' '+ translateY + ' ';
- trianglePos.transform = 'rotate('+ rotate +') scale('+ scaleX +','+ scaleY +') translateY('+ translateY +') translateX('+ translateX +')' ;
+ // trianglePos.transformOrigin = ' ' + translateX + ' '+ translateY + ' ';
+ //trianglePos.transform = 'rotate('+ rotate +') scale('+ scaleX +','+ scaleY +') translateY('+ translateY +') translateX('+ translateX +')' ;
+ trianglePos.transform = 'rotate('+ rotate +') scale('+ scaleX +','+ scaleY +') ' ;
  console.log(trianglePos);
  let divOneProps = {};
  let divTwoProps = {};
@@ -312,6 +318,30 @@ pointThree.y = Math.round(pointThree.y) ;
  Object.assign(divOneProps,style.baseProps,style.divOne);
  Object.assign(divTwoProps,style.baseProps,style.divTwo);
  Object.assign(divThreeProps,style.baseProps,style.divThree);
+
+ // let barStyle = {
+
+ //  position: 'absolute',
+ //  top: longestLineSegment.pointOne.y  + 'px',
+ //  left: longestLineSegment.pointOne.x + 'px',
+ //  background: 'black',
+ //  height: '0px',
+ //  width: '280.843px',
+ //  transform: ' rotate('+ rotate +') scaleX('+ scaleX +')',
+ //  transformOrigin: '0% 50%',
+ //  zIndex:'10',
+ //  borderTop: '5px solid black',
+ //  borderBottom: '5px solid black',
+ //  borderLeft: '5px solid black',
+ //  borderRight: '5px solid black',
+ //  outline: '0px solid black',
+ //  borderRadius: '50px 50px'
+ // };
+
+ let barStyle = {
+
+  
+ };
 
  style.helper = {
     width: trianglePos.left ,
@@ -335,6 +365,8 @@ pointThree.y = Math.round(pointThree.y) ;
 
     return (
       <div>
+        <div style={ barStyle }>
+         </div>
        <div style={ trianglePos }>
          <div style={ style.wrapTwo }>
            <div style={ style.wrapOne }>
