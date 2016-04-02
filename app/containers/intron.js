@@ -69,7 +69,7 @@ getPolygonCanvas(sourceCanvas) {
 componentDidMount() {
      //console.log(this);
      var intronRef = this;
-
+Cropper
       var options = {
           aspectRatio: 1,
           guides: false,
@@ -98,27 +98,28 @@ componentDidMount() {
 }
 
 // {
-//   <div style= {{ position: 'relative' , top: '360px' , left: '-40px' }} >        
+//   <div style= {{ position: 'relative' , top: '360px' , left: '-40px' }} >
 //           <Burfee vArray={ carry } hArray={ arry } opacity="1" color="#f5f5f5" />
 //         </div>
-//         <div style= {{ position: 'relative' , top: '360px' , left: '-40px' , zIndex: '-10' }} >        
+//         <div style= {{ position: 'relative' , top: '360px' , left: '-40px' , zIndex: '-10' }} >
 //           <Burfee vArray={ carry } opacity="1"  color="white" />
 //         </div>
 //         <div style={{  height: 400,   width: '70%'}}>
-//           <img 
-//           ref="img" 
+//           <img
+//           ref="img"
 //           src={this.props.src}
-//           alt={this.props.alt === undefined ? 'picture' : this.props.alt} 
+//           alt={this.props.alt === undefined ? 'picture' : this.props.alt}
 //           />
 //            <img style={{ width: '100%' }} src={this.state.preview} />
-//         </div> 
+//         </div>
 // }
-   
+
   render() {
 
-    let sides =6;
+    let sides = 3;
+
     let radius = 189;
-    let cradius = 135;
+    let cradius = 175;
 
     let a = ((Math.PI * 2)/sides);
     let arry = [];
@@ -130,17 +131,17 @@ componentDidMount() {
     }
 
     for (var i = 0; i < sides; i++) {
-      carry.push(300 + (cradius*Math.cos(a*i)));
-      carry.push(300 + (cradius*Math.sin(a*i)));
+      carry.push(250 + (cradius*Math.cos(a*i)));
+      carry.push(250 + (cradius*Math.sin(a*i)));
     }
 
     return (
       <div >
-        
-        <div style= {{ position: 'relative' , top: '360px' , left: '-40px' , zIndex: '-10' }} >        
+
+        <div style= {{ position: 'relative' , top: '0px' , left: '-40px' , zIndex: '-10' }} >
           <Burfee vArray={ carry } opacity=".5"  color="black" />
         </div>
-        
+
       </div>
     )
   }

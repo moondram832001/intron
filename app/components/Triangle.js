@@ -1,97 +1,24 @@
 import React, { Component } from 'react'
+import "babel-polyfill";
 
 
 let style = {
-wrapOne : {
-  position: 'absolute',
-  transformOrigin: '0% 100%',
-  transform: 'scale(1,1) skewX(0deg) translateX(140px)'   
-},
-
-one: {
-  width: '141px',
-  height: '122px',
-  background:'green',
-  position:'absolute',
-  opacity:'.7',
-  transformOrigin: '100% 0%',
-  transform: 'scale(1,1) skewX(-30deg) translateX(0px)', 
-  cursor: 'pointer',
-  boxShadow: '0px 0px 0px 0px #bbb',
-  backfaceVisibility: 'hidden'
-},
-
-wrapTwo: {
-  position: 'absolute',
-  transformOrigin: '0% 100%',
-  transform: 'scale(1,1) skewX(0deg)'   
-},
-
-two: {
-  width: '141px',
-  height: '122px',
-  background:'transparent',
-  position:'absolute',
-  background:'green',
-  opacity:'.7',
-  transformOrigin: '0% 0%',
-  transform: 'scale(1,1) skewX(30deg)', 
-  cursor: 'pointer',
-  boxShadow: '0px 0px 0px 0px #bbb',
-  backfaceVisibility: 'hidden'
-},
-
-unnecesaryWrapThree: {
-  position: 'absolute',
-  transformOrigin: '100% 100%',
-  transform: 'translateX(140px) translateY(0px)'   
-},
-
-wrapThree: {
-  position: 'absolute',
-  transformOrigin: '100% 100%',
-  transform: 'scale(1,1) skewY(0deg) rotate(30deg) translateX(0px)'   
-},
-
-three: {
-  width: '122px',
-  height: '141px',
-  background:'transparent',
-  position:'absolute',
-  background:'green',
-  opacity: '.7',
-  transformOrigin: '0% 100%',
-  transform: 'scale(1,1) skewY(30deg) rotate(0deg)', 
-  cursor: 'pointer',
-  boxShadow: '0px  0px 0px 0px #000',
-  backfaceVisibility: 'hidden'
-},
-
-transformWrap: {
-  position: 'absolute',
-  transformOrigin:'0% 0%'
-},
-
-positionWrap : {
-  position: 'absolute',
-  top: '244px',
-  left: '40px',
-  transform: 'translateX(-140px)'
-},
 
 baseProps : {
-  
-//  background:   -webkit-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 90%,rgba(0,0,255,1) 98% , rgba(0,0,255,0) 100%) , 
+
+  background:   '-webkit-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 90%,rgba(0,0,255,1) 98% , rgba(0,0,255,0) 100%) ',
+ background:   '-moz-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 90%,rgba(0,0,255,1) 98% , rgba(0,0,255,0) 100%) ',
 // -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 90%,rgba(0,0,255,1) 98% , rgba(0,0,255,0) 100%)   ,
-  background: 'black',
+//  background: 'black',
   opacity:'1',
-  position: 'absolute',  
+  position: 'absolute',
   top:'0px',
   left:'0px',
   opacity:'1',
   cursor: 'pointer',
-  
-  
+  boxShadow:'0px 0px 0px #000',
+  border:'0px solid black',
+  borderRadius: '2px'
 },
 
 divOne : {
@@ -100,8 +27,11 @@ divOne : {
   top:'0px',
   left:'0px',
   position:'absolute',
+
+  WebkitTransformOrigin:'0% 0%',
+  MozTransformOrigin:'0% 0%',
+  OTransformOrigin:'0% 0%',
   transformOrigin:'0% 0%',
- 
 },
 
 divTwo : {
@@ -110,9 +40,17 @@ divTwo : {
   position:'absolute',
   top:'100px',
   left:'0px',
+
+  WebkitTransformOrigin:'0% 0%',
+  MozTransformOrigin:'0% 0%',
+  OTransformOrigin:'0% 0%',
   transformOrigin: '0% 0%',
+
+  WebkitTransform: 'skewY(-45deg)',
+  MozTransform: 'skewY(-45deg)',
+  OTransform: 'skewY(-45deg)',
   transform: 'skewY(-45deg)',
-}, 
+},
 
 divThree : {
   width:'100px',
@@ -120,21 +58,47 @@ divThree : {
   position:'absolute',
   top:'0px',
   left:'100px',
+
+  WebkitTransformOrigin:'0% 0%',
+  MozTransformOrigin:'0% 0%',
+  OTransformOrigin:'0% 0%',
   transformOrigin: '0% 0%',
+
+  WebkitTransform:'skewX(-45deg)',
+  MozTransform:'skewX(-45deg)',
+  OTransform:'skewX(-45deg)',
   transform:'skewX(-45deg)',
-  
+
 },
 
 wrapOne : {
   position:'absolute',
   top:'0px',
   left:'0px',
+
+  WebkitTransform: 'skewX(45deg) skewY(0deg) rotate(-0deg) scaleX(1) scaleY(1)',
+  MozTransform: 'skewX(45deg) skewY(0deg) rotate(-0deg) scaleX(1) scaleY(1)',
+  OTransform: 'skewX(45deg) skewY(0deg) rotate(-0deg) scaleX(1) scaleY(1)',
   transform: 'skewX(45deg) skewY(0deg) rotate(-0deg) scaleX(1) scaleY(1)',
+
+
+  WebkitTransformOrigin:'0% 0%',
+  MozTransformOrigin:'0% 0%',
+  OTransformOrigin:'0% 0%',
   transformOrigin: '0% 0%'
-}, 
+},
 
 wrapTwo : {
+
+  WebkitTransform: 'scaleX(1) scaleY(1) skewY(45deg) rotate(45deg)',
+  MozTransform: 'scaleX(1) scaleY(1) skewY(45deg) rotate(45deg)',
+  OTransform: 'scaleX(1) scaleY(1) skewY(45deg) rotate(45deg)',
   transform: 'scaleX(1) scaleY(1) skewY(45deg) rotate(45deg)',
+
+
+  WebkitTransformOrigin:'0% 0%',
+  MozTransformOrigin:'0% 0%',
+  OTransformOrigin:'0% 0%',
   transformOrigin: '0% 0%'
 },
 
@@ -188,12 +152,12 @@ static defaultProps = {
 
   epsEqu = (x, y) => {
     return Math.abs(x - y) < Number.EPSILON;
-  } 
-   
+  }
+
 render() {
  //const { defaultValue }  = this.props;
  let { posX , posY , skewX , skewY , scaleX, scaleY , rotate , pointOne , pointTwo , pointThree } = this.props;
- 
+
 
 // pointOne.x = Math.round(pointOne.x) ;
 // pointOne.y = Math.round(pointOne.y) ;
@@ -205,7 +169,7 @@ render() {
 //console.log(pointTwo);
 
  let trianglePos = {
-    left: posX, 
+    left: posX,
     top: posY,
     position: 'absolute',
     transform: 'translateX(0px)'
@@ -232,20 +196,36 @@ render() {
  lineOneTwo.length =  Math.pow((Math.pow((lineOneTwo.pointOne.x - lineOneTwo.pointTwo.x) , 2) + Math.pow((lineOneTwo.pointOne.y - lineOneTwo.pointTwo.y) , 2)),.5);
  lineOneThree.length =  Math.pow((Math.pow((lineOneThree.pointOne.x - lineOneThree.pointTwo.x) , 2) + Math.pow((lineOneThree.pointOne.y - lineOneThree.pointTwo.y) , 2)),.5);
  lineTwoThree.length =  Math.pow((Math.pow((lineTwoThree.pointOne.x - lineTwoThree.pointTwo.x) , 2) + Math.pow((lineTwoThree.pointOne.y - lineTwoThree.pointTwo.y) , 2)),.5);
- 
+
  lineOneTwo.altLength = lineOneThree.length;
  lineTwoThree.altLength = lineOneTwo.length;
  lineOneThree.altLength = lineOneTwo.length;
 
  //const triangleSides =
- const maxLength = Math.max( lineOneTwo.length,lineOneThree.length,lineTwoThree.length); 
- const longestLineSegment = [lineOneTwo,lineOneThree,lineTwoThree].find(lineSegment => this.epsEqu(lineSegment.length,maxLength));
+ const maxLength = Math.max( lineOneTwo.length,lineOneThree.length,lineTwoThree.length);
+ //let longestLineSegment = [lineOneTwo,lineOneThree,lineTwoThree].find(lineSegment => this.epsEqu(lineSegment.length,maxLength));
+ let longestLineSegment = {};
+
+  const lineArray = [lineOneTwo,lineOneThree,lineTwoThree];
+  for(let i = 0 ; i < lineArray.length ; i++){
+    if(Number(lineArray[i].length) === Number(maxLength) ){
+      longestLineSegment = lineArray[i];
+    }
+  }
+
+let checkSign =  function (x){
+    if( +x === x ) { // check if a number was given
+        return (x >= 0) ? 1 : -1;
+    }
+    return NaN;
+}
+
 // const longestLineSegment = [lineOneTwo,lineOneThree,lineTwoThree].find(lineSegment =>  (lineSegment.length == maxLength));
- 
- // ( b.X - a.X ) * ( p.Y - a.Y ) - ( b.Y - a.Y ) * ( p.X - a.X ); 
- const pointPos  = Math.sign((longestLineSegment.pointTwo.x - longestLineSegment.pointOne.x) * 
-                   (longestLineSegment.pointAlt.y - longestLineSegment.pointOne.y) - 
-                   (longestLineSegment.pointTwo.y - longestLineSegment.pointOne.y)  * 
+
+ // ( b.X - a.X ) * ( p.Y - a.Y ) - ( b.Y - a.Y ) * ( p.X - a.X );
+ const pointPos  = checkSign((longestLineSegment.pointTwo.x - longestLineSegment.pointOne.x) *
+                   (longestLineSegment.pointAlt.y - longestLineSegment.pointOne.y) -
+                   (longestLineSegment.pointTwo.y - longestLineSegment.pointOne.y)  *
                    (longestLineSegment.pointAlt.x - longestLineSegment.pointOne.x) );
 
  const halfPerimeter =  (lineOneTwo.length + lineOneThree.length + lineTwoThree.length)/2;
@@ -253,7 +233,7 @@ render() {
  const height = (2 * area)/longestLineSegment.length;
  const delta_x = longestLineSegment.pointTwo.x - longestLineSegment.pointOne.x;
  const delta_y = longestLineSegment.pointTwo.y - longestLineSegment.pointOne.y;
- 
+
  const ang = Math.atan2(delta_y,delta_x) * 180/Math.PI;
  const adjLength  = Math.abs(Math.pow(((Math.pow(longestLineSegment.altLength,2)) - (Math.pow(height,2))),.5));
 
@@ -266,8 +246,8 @@ render() {
  //const skewAngle = 45 - 90 * (adjLength/longestLineSegment.length);
  let sAngle = Math.atan2(height,adjLength) * 180/Math.PI;
  let sRatio = 90 / (90 - sAngle);
- 
- const secAdjLength  = Math.abs(Math.pow(((Math.pow(50,2)) - (Math.pow(height,2))),.5)); 
+
+ const secAdjLength  = Math.abs(Math.pow(((Math.pow(50,2)) - (Math.pow(height,2))),.5));
  const secskewAngle = 45 +  90 * (secAdjLength/longestLineSegment.length);
  //const skewAngle = 45 - (((90 - sAngle) * (adjLength/longestLineSegment.length)) * sRatio);
  //let sAngle = Math.atan2(100,.01) * 180/Math.PI;
@@ -280,11 +260,11 @@ render() {
  let lenRatio = height/(longestLineSegment.length/2);
  let scaledLen = (adjLength - (longestLineSegment.length/2)) * lenRatio ;
  const skewAngle =  -1 * Math.atan2(scaledLen,height) * 180/Math.PI;
- skewX = skewAngle + 'deg';
- //console.log(skewX , adjLength , longestLineSegment.length );
+ skewX = Number(skewAngle).toFixed(10) + 'deg';
+ console.log(skewX , adjLength , longestLineSegment );
 
- 
-  
+
+
 
  scaleX = '1';
  scaleY= '1';
@@ -295,7 +275,12 @@ render() {
  // //rotate = '0deg';
  rotate = ang + 'deg';
 
+
+ style.wrapTwo.WebkitTransform = 'skewX('+ skewX + ') skewY('+ skewY + ') rotate(-45deg)' ;
+ style.wrapTwo.MozTransform = 'skewX('+ skewX + ') skewY('+ skewY + ') rotate(-45deg)' ;
+ style.wrapTwo.OTransform = 'skewX('+ skewX + ') skewY('+ skewY + ') rotate(-45deg)' ;
  style.wrapTwo.transform = 'skewX('+ skewX + ') skewY('+ skewY + ') rotate(-45deg)' ;
+
  //console.log(style.wrapTwo , ang , skewX , adjLength , longestLineSegment.length,vecAngle , adjRatio , adjacentLength , sAngle + 'dege');
 
  trianglePos.left = (longestLineSegment.pointOne.x) + 'px';
@@ -305,15 +290,20 @@ render() {
 
  // trianglePos.transformOrigin = ' ' + translateX + ' '+ translateY + ' ';
  //trianglePos.transform = 'rotate('+ rotate +') scale('+ scaleX +','+ scaleY +') translateY('+ translateY +') translateX('+ translateX +')' ;
+
+ trianglePos.WebkitTransform = 'rotate('+ rotate +') scale('+ scaleX +','+ scaleY +') ' ;
+ trianglePos.MozTransform = 'rotate('+ rotate +') scale('+ scaleX +','+ scaleY +') ' ;
+ trianglePos.OTransform = 'rotate('+ rotate +') scale('+ scaleX +','+ scaleY +') ' ;
  trianglePos.transform = 'rotate('+ rotate +') scale('+ scaleX +','+ scaleY +') ' ;
- console.log(trianglePos);
+
+  console.log(trianglePos);
  let divOneProps = {};
  let divTwoProps = {};
  let divThreeProps = {};
 
  style.baseProps.opacity = this.props.opacity;
  //style.baseProps.boxShadow = this.props.shadow;
- style.baseProps.background = this.props.color;
+ //style.baseProps.background = this.props.color;
 
  Object.assign(divOneProps,style.baseProps,style.divOne);
  Object.assign(divTwoProps,style.baseProps,style.divTwo);
@@ -340,7 +330,7 @@ render() {
 
  let barStyle = {
 
-  
+
  };
 
  style.helper = {
@@ -361,12 +351,10 @@ render() {
     background: 'blue'
  };
 
-//console.log("longest line segmetn",longestLineSegment, height ,skewX, adjLength , secAdjLength , secskewAngle , sAngle); 
+//console.log("longest line segmetn",longestLineSegment, height ,skewX, adjLength , secAdjLength , secskewAngle , sAngle);
 
     return (
       <div>
-        <div style={ barStyle }>
-         </div>
        <div style={ trianglePos }>
          <div style={ style.wrapTwo }>
            <div style={ style.wrapOne }>
