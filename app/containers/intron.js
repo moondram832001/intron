@@ -149,7 +149,7 @@ componentDidMount() {
             <img style={{ width: '100%' }} />
         </div>
        
-          <Burffee  src={this.state.preview} sides={7} />
+          <Burffee  src={this.state.preview} sides={7}  radius={150} rotation={50}/>
        
       </div>
     )

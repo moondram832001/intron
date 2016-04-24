@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 //import Konva from 'konva'
 
-import {Layer, Rect, Stage, Group, Shape} from 'react-konva';
+import {Layer, Rect, Stage, Group, Shape,Transform} from 'react-konva';
 
 //let {Stage, Layer, Rect, Star, Circle, Shape} = ReactKonva;
 
@@ -15,6 +15,9 @@ constructor(...args) {
   this.frontCanvasRef = null;
   this.handleClick = this.handleClick.bind(this);
   //this.sides = 7;
+  this.pointsArray = [];
+  this.pointsArray1 = [];
+  
 }
 
 static propTypes = {
@@ -107,10 +110,10 @@ cxt.beginPath();
 cxt.moveTo(pointsArray[0],pointsArray[1]);          
  console.log(pointsArray[0 ],pointsArray[ 1 ] );
 for (var i = 1; i <= numberOfSides;i += 1) {
- //  cxt.lineTo (pointsArray[2 * i ] , pointsArray[2 * i + 1 ]);
+   cxt.lineTo (pointsArray[2 * i ] , pointsArray[2 * i + 1 ]);
  // console.log(pointsArray[2 * i ],pointsArray[2 * i + 1 ] );
   
-      cxt.quadraticCurveTo(pointsArray1[2 * i ], pointsArray1[2 * i + 1 ], pointsArray[2 * i ], pointsArray[2 * i + 1 ]);
+ //     cxt.quadraticCurveTo(pointsArray1[2 * i ], pointsArray1[2 * i + 1 ], pointsArray[2 * i ], pointsArray[2 * i + 1 ]);
 }
 cxt.closePath();
 cxt.strokeStyle = "#fff";
@@ -188,9 +191,9 @@ function def(x, y, points, radius1, radius2,initAngle){
   let angly = '1';
   
   var points = this.attrs.sidesCount;
-  var radius1 = 175 , radius2 = 0 , offset = 0;
-  var x = 200,y = 200;
-  var initAngle = 0;
+  var radius1 = this.attrs.radius , radius2 = 0 , offset = 0;
+  var x = this.attrs.radius,y = this.attrs.radius;
+  var initAngle =   this.attrs.rotate ? this.attrs.rotate * Math.PI/180 : 0 ;
   
     var numberOfSides = points,
     size = radius1,
@@ -199,16 +202,24 @@ function def(x, y, points, radius1, radius2,initAngle){
     Ycenter = y;
     initAngle = parseFloat(initAngle); 
   
-  
   var angleDiv = points * 2;
-  var pointsArray = def(x, y, points, radius1, radius2,offset + (initAngle) * 2 * Math.PI/angleDiv);
-  var pointsArray1 = def(x, y, points, radius1 - 60, radius2,offset + (initAngle - 1) * 2 * Math.PI/angleDiv);
+  //radius1 = radius1 - (radius1 * 15/100);
+  var radiusPerc = radius1 * 40/100;
+  // var pointsArray = def(x, y, points, radius1, radius2,offset + (initAngle) * 2 * Math.PI/angleDiv);
+  // var pointsArray1 = def(x, y, points, radius1 - radiusPerc, radius2,offset + (initAngle - 1) * 2 * Math.PI/angleDiv);
+  var pointsArray = def(x, y, points, radius1, 0, initAngle );
+  //var pointsArray = this.attrs.pointsArray;
+  var pointsArray1 = def(x, y, points, radius1 - radiusPerc,0, initAngle - 2 * Math.PI/angleDiv);
+  //var pointsArray1 = this.attrs.pointsArray1;
+  console.log(pointsArray);
   
 cxt.beginPath();
 cxt.moveTo(pointsArray[0],pointsArray[1]);          
 console.log(pointsArray[0 ],pointsArray[ 1 ] );
 for (var i = 1; i <= numberOfSides;i += 1) {
- //  cxt.lineTo (pointsArray[2 * i ] , pointsArray[2 * i + 1 ]);
+   //cxt.lineTo (pointsArray1[2 * i ] , pointsArray1[2 * i + 1 ]);
+   //cxt.lineTo (pointsArray[2 * i ] , pointsArray[2 * i + 1 ]);
+   
  // console.log(pointsArray[2 * i ],pointsArray[2 * i + 1 ] );
   
       cxt.quadraticCurveTo(pointsArray1[2 * i ], pointsArray1[2 * i + 1 ], pointsArray[2 * i ], pointsArray[2 * i + 1 ]);
@@ -237,30 +248,34 @@ getPolygonCanvas(sourceCanvas) {
   var points = sides;
   //var radius = .4166 * width;
   //var radius =  175;
-  var radius =  width * .45;
+  var radius =  width * .5;
+  //var radius =  this.props.radius;
+  
   var a = ((Math.PI * 2)/sides);
   //console.log(width,height,radius);
     var angleDiv = points * 2;
-    var initAngle = 0;
+    var initAngle =  this.props.rotation ? this.props.rotation * Math.PI/180 : 0 ;
     var offset= 0;
     
   canvas.width = width;
   canvas.height = height;
   var radiusPerc = radius * 40/100;
-  var pointsArray = this.def(width / 2, height / 2, points, radius, 0,offset + (initAngle) * 2 * Math.PI/angleDiv);
+  this.pointsArray = this.def(width / 2, height / 2, points, radius, 0,(initAngle) );
+  this.pointsArray1 = this.def(width / 2, height / 2, points, radius - radiusPerc, 0, initAngle - 2 * Math.PI/angleDiv);
   
-  var pointsArray1 = this.def(width / 2, height / 2, points, radius - radiusPerc, 0,offset + (initAngle - 1) * 2 * Math.PI/angleDiv);
-
+  console.log(this.pointsArray);
 
   context.beginPath();
   //context.moveTo(width / 2 + (radius*Math.cos(0)),height / 2 + (radius*Math.sin(0)));
-  context.moveTo(pointsArray[0],pointsArray[1]);     
+  context.moveTo(this.pointsArray[0],this.pointsArray[1]);     
   //console.log(width / 2 + (radius*Math.cos(a*0)), height / 2 + (radius*Math.sin(a*0)));
   for (var i = 1; i <= sides; i++) {
     //width / 2 + (radius*Math.cos(a*i));
     //height / 2 + (radius*Math.sin(a*i));
     //context.lineTo(width / 2 + (radius*Math.cos(a*i )),height / 2 + (radius*Math.sin(a*i)));
-    context.quadraticCurveTo(pointsArray1[2 * i ], pointsArray1[2 * i + 1 ], pointsArray[2 * i ], pointsArray[2 * i + 1 ]);
+    //context.lineTo (pointsArray1[2 * i ] , pointsArray1[2 * i + 1 ]);
+    //context.lineTo (pointsArray[2 * i ] , pointsArray[2 * i + 1 ]);
+    context.quadraticCurveTo(this.pointsArray1[2 * i ], this.pointsArray1[2 * i + 1 ], this.pointsArray[2 * i ], this.pointsArray[2 * i + 1 ]);
 //    console.log(width / 2 + (radius*Math.cos(a*i)), height / 2 + (radius*Math.sin(a*i)));
   }
   
@@ -288,11 +303,11 @@ getPolygonCanvas(sourceCanvas) {
 
 
 render() {
-  const { opacity,shadow,color,src,sides } = this.props;
+  const { opacity,shadow,color,src,sides,radius,rotation } = this.props;
   let style = {
     burfee : {}
   };
-
+  
   let ImageSrc = this.getPolygonCanvas(src);
  
  
@@ -345,20 +360,55 @@ render() {
        document.body.style.cursor = "default";
    };
       
+    let styleImg = {
+      width: (2 * radius) + 'px',
+      position:'absolute',
+      height : (2 * radius) + 'px',
+      zIndex : -1 ,
+      opacity : '1' 
+    };
+    
+    let styleDivImg = {
+      width: (2 * radius) + 'px',
+      position:'absolute',
+      height : (2 * radius) + 'px',
+      transformOrigin : radius + 'px ' + radius + 'px',
+      transform: 'rotate('+rotation+'deg)'
+    };
+    
+    let StageStyle = {
+      transformOrigin : radius + 'px ' + radius + 'px',
+      transform: 'rotate('+rotation+'deg)',
+      position:'absolute'
+    };
+    
+    
+    if(this.refs.layery) {
+      console.log(this.refs.imagy.style.transform);
+//      this.refs.layery.canvas._canvas.style.transform = 'rotate('+ rotation+'deg)';  
+//      this.refs.imagy.style.transform = 'rotate('+ rotation+'deg)'; 
+    }
+    
+      
     return (
       <div style={style.burfee}>
-        <img style={{ width: '400px' , position:'absolute' , height : '400px', top: '307px'  , opacity : '1' , zIndex : -1}}  src={ ImageSrc }/>
-        <Stage width={400} height={400}>
-            <Layer>
+        <div >
+        <img ref="imagy" style={ styleImg }  src={ ImageSrc }/>
+        </div>
+        <Stage width={2 * radius} height={ 2 * radius}  >
+            
+            <Layer ref="layery" >
+                
                  <Shape
-                    fill="transparent"  stroke="blue"  strokeWidth="4" sceneFunc={ this.scenefunk }
+                    fill="transparent"  opacity="1" stroke="white"  strokeWidth={ parseInt(radius*15/100) } lineJoin='round' sceneFunc={ this.scenefunk }
                     hitFunc={ this.scenefunk } shadowBlur={10} 
                     onMouseEnter={ museenter } onMouseLeave={ museleave } 
-                    onClick={this.handleClick} sidesCount={sides} />
-                    
+                    onClick={this.handleClick} sidesCount={sides} radius={radius}  rotate={rotation} offsetX={0} offsetY={0}  pointsArray={ this.pointsArray } pointsArray1={ this.pointsArray1 } />
                 
             </Layer>
+            
         </Stage>
+        
       </div>
     )
   }
