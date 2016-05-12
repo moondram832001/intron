@@ -204,12 +204,12 @@ function def(x, y, points, radius1, radius2,initAngle){
   
   var angleDiv = points * 2;
   //radius1 = radius1 - (radius1 * 15/100);
-  var radiusPerc = radius1 * 40/100;
+  var radiusPerc = radius1 * this.attrs.curveFactor/100;
   // var pointsArray = def(x, y, points, radius1, radius2,offset + (initAngle) * 2 * Math.PI/angleDiv);
   // var pointsArray1 = def(x, y, points, radius1 - radiusPerc, radius2,offset + (initAngle - 1) * 2 * Math.PI/angleDiv);
-  var pointsArray = def(x, y, points, radius1, 0, initAngle );
+  var pointsArray = def(x + parseInt(radius1*15/100), y + parseInt(radius1*15/100), points, radius1, 0, initAngle );
   //var pointsArray = this.attrs.pointsArray;
-  var pointsArray1 = def(x, y, points, radius1 - radiusPerc,0, initAngle - 2 * Math.PI/angleDiv);
+  var pointsArray1 = def(x + parseInt(radius1*15/100), y + parseInt(radius1*15/100), points, radius1 - radiusPerc,0, initAngle - 2 * Math.PI/angleDiv);
   //var pointsArray1 = this.attrs.pointsArray1;
   console.log(pointsArray);
   
@@ -259,7 +259,7 @@ getPolygonCanvas(sourceCanvas) {
     
   canvas.width = width;
   canvas.height = height;
-  var radiusPerc = radius * 40/100;
+  var radiusPerc = radius * this.props.curveFactor/100;
   this.pointsArray = this.def(width / 2, height / 2, points, radius, 0,(initAngle) );
   this.pointsArray1 = this.def(width / 2, height / 2, points, radius - radiusPerc, 0, initAngle - 2 * Math.PI/angleDiv);
   
@@ -303,7 +303,7 @@ getPolygonCanvas(sourceCanvas) {
 
 
 render() {
-  const { opacity,shadow,color,src,sides,radius,rotation } = this.props;
+  const { opacity,shadow,color,src,sides,radius,rotation,curveFactor } = this.props;
   let style = {
     burfee : {}
   };
@@ -365,7 +365,9 @@ render() {
       position:'absolute',
       height : (2 * radius) + 'px',
       zIndex : -1 ,
-      opacity : '1' 
+      opacity : '1' ,
+      top: parseInt(this.props.yPos + "px") + parseInt(radius*15/100) + "px",
+      left: parseInt(this.props.xPos) + parseInt(radius*15/100) + "px"
     };
     
     let styleDivImg = {
@@ -393,19 +395,24 @@ render() {
     return (
       <div style={style.burfee}>
         <img ref="imagy" style={ styleImg }  src={ ImageSrc }/>
-        <Stage width={2 * radius + 20} height={ 2 * radius + 20}  >
-            
-            <Layer ref="layery" >
-                
-                 <Shape
-                    fill="transparent"  opacity="1" stroke="white"  strokeWidth={ parseInt(radius*15/100) } lineJoin='round' sceneFunc={ this.scenefunk }
-                    hitFunc={ this.scenefunk } shadowBlur={10} 
-                    onMouseEnter={ museenter } onMouseLeave={ museleave } 
-                    onClick={this.handleClick} sidesCount={sides} radius={radius}  rotate={rotation} offsetX={0} offsetY={0}  pointsArray={ this.pointsArray } pointsArray1={ this.pointsArray1 } />
-                
-            </Layer>
-            
-        </Stage>
+        <div style={{ position: 'absolute' , top:this.props.yPos + "px" , left: this.props.xPos + 'px' }}>
+          <Stage width={2 * radius + 50} height={ 2 * radius + 50}  >
+              
+              <Layer ref="layery" >
+                  
+                   <Shape
+                      fill="transparent"  opacity="1" stroke="white"  strokeWidth={ parseInt(radius*15/100) } lineJoin='round' sceneFunc={ this.scenefunk }
+                      hitFunc={ this.scenefunk } shadowBlur={3} shadowColor="#999"
+                      onMouseEnter={ museenter } onMouseLeave={ museleave } 
+                      onClick={this.handleClick} sidesCount={sides} radius={radius}  rotate={rotation} offsetX={0} offsetY={0} 
+                      pointsArray={ this.pointsArray } pointsArray1={ this.pointsArray1 } 
+                      curveFactor={curveFactor}
+                      />
+                  
+              </Layer>
+              
+          </Stage>
+        </div>
         
       </div>
     )

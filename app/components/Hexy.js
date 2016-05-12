@@ -18,6 +18,18 @@ class Hexy extends Component {
     this.siblingsObject = {};
     this.regularPolyObject = {};
   }
+  
+  
+static propTypes = {
+  radius: React.PropTypes.number
+};
+
+static defaultProps = {
+  radius : 50,
+  padding: 100,
+  domPolyOffset:0
+};
+
 
   componentDidMount() {
     this.siblingsArray.map(function(sibling){
@@ -45,6 +57,10 @@ class Hexy extends Component {
 
   componentWillUnmount() {
  
+  }
+  
+  componentWillMount() {
+  //   this.props.domPolyOffset = this.props.radius + this.props.padding;
   }
   
   handleMouseDown = () => {
@@ -207,11 +223,15 @@ class Hexy extends Component {
 
   render() {
      let {width,height} = this.props;
-      
+     let domPolyOffset = this.props.radius + this.props.padding; 
+     let domPolyAbsPosY = domPolyOffset + this.props.yPos;
+     let domPolyAbsPosX = domPolyOffset + this.props.xPos;
+     
     return ( 
-        <Plat width={1000} height={1000} >
+       <div style={{ position: 'absolute', top: this.props.yPos + 'px' , left: this.props.xPos + 'px' }} >  
+        <Plat width={6 * this.props.radius + 50} height={6 * this.props.radius + 50} >
         
-         <DD xx="300" yy="300"  radius="50" rotation="30" offsetX="0" offsetY="0" 
+         <DD xx={domPolyOffset} yy={domPolyOffset}  radius={this.props.radius} rotation="30" offsetX="0" offsetY="0" 
            transformOriginX="50" transformOriginY="0" shadow="0" fill="#ff0000" rot="10" MouseOver={this.handleMouseOver}
            MouseOut={this.handleMouseOut}
            MouseDown={this.handleMouseDown}
@@ -224,7 +244,7 @@ class Hexy extends Component {
            key="1" 
          />
          
-         <DD xx="300" yy="300"  radius="50" rotation="150" offsetX="0" offsetY="0" 
+         <DD xx={domPolyOffset} yy={domPolyOffset}  radius={this.props.radius} rotation="150" offsetX="0" offsetY="0" 
            transformOriginX="50" transformOriginY="0" shadow="0" fill="#ff0000" rot="10" MouseOver={this.handleMouseOver}
            MouseOut={this.handleMouseOut}
            MouseDown={this.handleMouseDown}
@@ -237,7 +257,7 @@ class Hexy extends Component {
            key="2"
          />
          
-         <DD xx="300" yy="300"  radius="50" rotation="270" offsetX="0" offsetY="0" 
+         <DD xx={domPolyOffset} yy={domPolyOffset}  radius={this.props.radius} rotation="270" offsetX="0" offsetY="0" 
            transformOriginX="50" transformOriginY="0" shadow="0" fill="#ff0000" rot="10" MouseOver={this.handleMouseOver}
            MouseOut={this.handleMouseOut}
            MouseDown={this.handleMouseDown}
@@ -250,14 +270,15 @@ class Hexy extends Component {
            key="3"
          />
          
-          <Poly xx="300" yy="300" sides="6" radius="100" rotation="0" offsetX="0" offsetY="0" parentRef={this.regularPolyObject}
+          <Poly xx={domPolyOffset} yy={domPolyOffset} sides="6" radius="100" rotation="0" offsetX="0" offsetY="0" parentRef={this.regularPolyObject}
            transformOriginX="50" transformOriginY="0" shadow="15" onClick={this.handleClick} level="-1"  listen={true} name="frontButton"
           />
-           <Poly xx="300" yy="300" sides="6" radius="200" rotation="0" offsetX="0" offsetY="0" scaleParent=".5"
+           <Poly xx={domPolyOffset} yy={domPolyOffset} sides="6" radius="200" rotation="0" offsetX="0" offsetY="0" scaleParent=".5"
            transformOriginX="50" transformOriginY="0" shadow="15" level="-2" listen={false} parentRef={this.regularPolyObject} name="backShadowPoly"
           />
         
       </Plat>
+      </div>
     );
   }
 }

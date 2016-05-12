@@ -151,10 +151,9 @@ componentDidMount() {
             <img style={{ width: '100%' }} />
         </div>
        
-          <Burffee  src={this.state.preview} sides={5}  radius={100} rotation={10}/>
-          <div style={{ position: 'absolute', top: '500px' , left: '0px' }} >    
-            <Hexy />
-          </div>
+          <Burffee  src={this.state.preview} sides={6}  radius={100} rotation={-30} xPos="500" yPos="350" curveFactor="10" />
+          <Hexy xPos={465} yPos={650} />
+         
          
       </div>
     )
