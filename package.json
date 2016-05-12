@@ -25,11 +25,17 @@
   "homepage": "https://github.com/moondram832001/intron",
   "dependencies": {
     "cropperjs": "^0.5.2",
+    "css-loader": "^0.23.1",
     "earcut": "^2.1.0",
+    "file-loader": "^0.8.5",
+    "font-awesome": "^4.6.1",
     "konva": "^0.12.4",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
-    "react-konva": "^0.6.6"
+    "react-fontawesome": "^1.0.0",
+    "react-konva": "^0.6.6",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7"
   },
   "devDependencies": {
     "babel-loader": "^6.2.3",

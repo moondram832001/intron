@@ -384,7 +384,7 @@ render() {
     
     
     if(this.refs.layery) {
-      console.log(this.refs.imagy.style.transform);
+      console.log(this.refs.layery);
 //      this.refs.layery.canvas._canvas.style.transform = 'rotate('+ rotation+'deg)';  
 //      this.refs.imagy.style.transform = 'rotate('+ rotation+'deg)'; 
     }
@@ -392,10 +392,8 @@ render() {
       
     return (
       <div style={style.burfee}>
-        <div >
         <img ref="imagy" style={ styleImg }  src={ ImageSrc }/>
-        </div>
-        <Stage width={2 * radius} height={ 2 * radius}  >
+        <Stage width={2 * radius + 20} height={ 2 * radius + 20}  >
             
             <Layer ref="layery" >
                 

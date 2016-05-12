@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 
 import Burffee from '../components/Burffee'
+import CC from '../components/CC'
+import Hexy from '../components/Hexy'
 import Cropper from 'cropperjs';
 import 'cropperjs';
 import 'cropperjs/dist/cropper.css';
@@ -149,8 +151,11 @@ componentDidMount() {
             <img style={{ width: '100%' }} />
         </div>
        
-          <Burffee  src={this.state.preview} sides={7}  radius={150} rotation={50}/>
-       
+          <Burffee  src={this.state.preview} sides={5}  radius={100} rotation={10}/>
+          <div style={{ position: 'absolute', top: '500px' , left: '0px' }} >    
+            <Hexy />
+          </div>
+         
       </div>
     )
   }
