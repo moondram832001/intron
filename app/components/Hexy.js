@@ -148,9 +148,9 @@ static defaultProps = {
         
        // sibling.refs.domParent.style.transformOrigin = "18.624% 16.7063%";
        // sibling.refs.domParent.style.transformOrigin = "25.624% 25.7063%";
-        sibling.refs.domParent.style.transformOrigin = "50px 0px";
+      //  sibling.refs.domParent.style.transformOrigin = "50px 0px";
         sibling.refs.domParent.style.transform = transformString;
-        sibling.refs.domParentOne.style.transformOrigin = "50px 0px";
+      //  sibling.refs.domParentOne.style.transformOrigin = "50px 0px";
         sibling.refs.domParentOne.style.transform = transformString;
         sibling.refs.def.node.children[0].scaleX( sibling.canPolyProps.scale);
         sibling.refs.def.node.children[0].scaleY( sibling.canPolyProps.scale);
@@ -165,11 +165,11 @@ static defaultProps = {
       this.clickFlag = 0;
       }
 
-      this.regularPolyObject['backShadowPoly'].refs.domParent.style.transition = 'all 1s';
+      this.regularPolyObject['backShadowPoly'].refs.domParent.style.transition = 'all 1s ';
       this.regularPolyObject['backShadowPoly'].refs.domParent.style.transform = 'scale(.5,.5)';
       this.regularPolyObject['backShadowPoly'].refs.domParent.style.opacity = 0;
 
-      this.regularPolyObject['frontButton'].refs.domParent.style.transition = 'all 1s';
+      this.regularPolyObject['frontButton'].refs.domParent.style.transition = 'all 1s ';
       this.regularPolyObject['frontButton'].refs.domParent.style.transform = 'scale(1,1)';
 
       this.regularPolyObject['frontButton'].refs.def.node.children[0].radius("100");
@@ -271,10 +271,10 @@ static defaultProps = {
          />
          
           <Poly xx={domPolyOffset} yy={domPolyOffset} sides="6" radius="100" rotation="0" offsetX="0" offsetY="0" parentRef={this.regularPolyObject}
-           transformOriginX="50" transformOriginY="0" shadow="15" onClick={this.handleClick} level="-1"  listen={true} name="frontButton"
+           transformOriginX="50" transformOriginY="0" shadow="5" onClick={this.handleClick} level="-1"  listen={true} name="frontButton"
           />
            <Poly xx={domPolyOffset} yy={domPolyOffset} sides="6" radius="200" rotation="0" offsetX="0" offsetY="0" scaleParent=".5"
-           transformOriginX="50" transformOriginY="0" shadow="15" level="-2" listen={false} parentRef={this.regularPolyObject} name="backShadowPoly"
+           transformOriginX="50" transformOriginY="0" shadow="5" level="-2" listen={false} parentRef={this.regularPolyObject} name="backShadowPoly"
           />
         
       </Plat>

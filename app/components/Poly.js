@@ -122,7 +122,8 @@ componentDidMount() {
         roty : this.props.rotation,
         offX : ((this.props.transformOriginX/100) *  2 * radShad) - radShad,
         offY : ((this.props.transformOriginY/100) *  2 * radShad) - radShad,
-        shadow: this.props.shadow
+        shadow: this.props.shadow,
+        shadowColor: '#999'
     };
     
     this.refs.def.node.children[0].opacity(this.canPolyProps.opacityValue);
@@ -134,10 +135,12 @@ componentDidMount() {
     this.refs.def.node.children[0].offsetX(this.canPolyProps.offX);
     this.refs.def.node.children[0].offsetY(this.canPolyProps.offY);
     this.refs.def.node.children[0].shadowBlur(this.canPolyProps.shadow);
+    this.refs.def.node.children[0].shadowColor(this.canPolyProps.shadowColor);
     this.refs.def.node.draw();
     this.canBounds = this.refs.def.node.children[0].getClientRect();
     console.log(this.canBounds , divBounds);
     this.refs.domScaler.style.transition = 'all .3s';
+    this.refs.domParent.style.transitionDelay = '.5s';
    // this.refs.def.node.children[0].rotate(this.canPolyProps.roty);
 
     this.domPolyProps = {
@@ -224,13 +227,14 @@ componentWillMount(){
         sides : this.props.sides,
         opacityValue : 1,
         rady : this.props.radius * this.scaleFactor,
-        filler: "#eee",
+        filler: "#fff",
         xPos: this.props.width/2,
         yPos: this.props.height/2,
         roty : 0,
         offX : 0,
         offY : 0,
-        shadow: this.props.shadow * this.scaleFactor
+        shadow: this.props.shadow * this.scaleFactor,
+        shadowColor: '#999'
     };
 }
 
@@ -284,7 +288,7 @@ render() {
                     rotation={this.canPolyProps.roty}
                     offsetX={this.canPolyProps.offX}
                     offsetY={this.canPolyProps.offY} 
-                    shadowColor='black'
+                    shadowColor={this.canPolyProps.shadowColor} 
                     shadowBlur={this.canPolyProps.shadow}
                     shadowOffsetX="0"
                     shadowOffsetY="0"

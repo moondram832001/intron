@@ -156,6 +156,12 @@ componentDidMount(){
    this.refs.domPolyOne.style.transition = 'all .2s';
    this.refs.domIcon.style.transition = 'all 1s';
    this.refs.domParentOne.style.transition = 'all 1s';
+ //  this.refs.domParentOne.style.transitionDelay = '.5s';
+ //  this.refs.domPoly.style.transitionDelay = '.5s';
+ //  this.refs.domParent.style.transitionDelay = '.5s';
+ //  this.refs.domIcon.style.transitionDelay = '.5s';
+ //  this.refs.domPolyOne.style.transitionDelay = '.5s';
+    
    // this.refs.def.node.children[0].rotate(this.canPolyProps.roty);
 
     this.domPolyProps = {
@@ -248,7 +254,7 @@ componentWillMount(){
         sides : this.props.sides,
         opacityValue : 1,
         rady : "100",
-        filler: "#eee",
+        filler: "#fff",
         piller: this.props.activeColor,
         xPos: this.props.width/2,
         yPos: this.props.height/2,
