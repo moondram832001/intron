@@ -187,7 +187,7 @@ function def(x, y, points, radius1, radius2,initAngle){
   // hexagon
   let count = this.sides;
  // let angleDiv = count * 2;
- console.log(this.attrs.sidesCount);
+// console.log(this.attrs.sidesCount);
   let angly = '1';
   
   var points = this.attrs.sidesCount;
@@ -211,11 +211,11 @@ function def(x, y, points, radius1, radius2,initAngle){
   //var pointsArray = this.attrs.pointsArray;
   var pointsArray1 = def(x + parseInt(radius1*15/100), y + parseInt(radius1*15/100), points, radius1 - radiusPerc,0, initAngle - 2 * Math.PI/angleDiv);
   //var pointsArray1 = this.attrs.pointsArray1;
-  console.log(pointsArray);
+ // console.log(pointsArray);
   
 cxt.beginPath();
 cxt.moveTo(pointsArray[0],pointsArray[1]);          
-console.log(pointsArray[0 ],pointsArray[ 1 ] );
+//console.log(pointsArray[0 ],pointsArray[ 1 ] );
 for (var i = 1; i <= numberOfSides;i += 1) {
    //cxt.lineTo (pointsArray1[2 * i ] , pointsArray1[2 * i + 1 ]);
    //cxt.lineTo (pointsArray[2 * i ] , pointsArray[2 * i + 1 ]);
@@ -234,7 +234,7 @@ cxt.fillStrokeShape(this);
 
 
 handleClick() {
-    console.log("clicked");     
+ //   console.log("clicked");     
 }
 
 getPolygonCanvas(sourceCanvas) {
@@ -263,7 +263,7 @@ getPolygonCanvas(sourceCanvas) {
   this.pointsArray = this.def(width / 2, height / 2, points, radius, 0,(initAngle) );
   this.pointsArray1 = this.def(width / 2, height / 2, points, radius - radiusPerc, 0, initAngle - 2 * Math.PI/angleDiv);
   
-  console.log(this.pointsArray);
+ // console.log(this.pointsArray);
 
   context.beginPath();
   //context.moveTo(width / 2 + (radius*Math.cos(0)),height / 2 + (radius*Math.sin(0)));
@@ -351,12 +351,12 @@ render() {
       }; 
       
    let museenter = function(){
-       console.log("moused over");
+ //      console.log("moused over");
        document.body.style.cursor = "pointer";
    };
    
    let museleave = function(){
-       console.log("moused leaver");
+ //      console.log("moused leaver");
        document.body.style.cursor = "default";
    };
       
@@ -386,7 +386,7 @@ render() {
     
     
     if(this.refs.layery) {
-      console.log(this.refs.layery);
+    //  console.log(this.refs.layery);
 //      this.refs.layery.canvas._canvas.style.transform = 'rotate('+ rotation+'deg)';  
 //      this.refs.imagy.style.transform = 'rotate('+ rotation+'deg)'; 
     }

@@ -49,7 +49,7 @@ handleClick = () => {
 }
 
 handleMouseOver = () => {
-    console.log("over");
+ //   console.log("over");
     
     let translateString = 'translate(' +  this.canBounds.x + 'px,' +  this.canBounds.y + 'px) ';
     let rotateString = 'rotate('+ this.canPolyProps.roty + 'deg) ';
@@ -60,7 +60,7 @@ handleMouseOver = () => {
 }
 
 handleMouseOut = () => {
-    console.log("out");
+  //console.log("out");
     
     //this.refs.domParent.style.transition= 'all .3s'; 
     
@@ -102,7 +102,7 @@ componentDidMount() {
  //   console.log(this.refs.def.node.getCanvas());
    // var ff = this.refs.domPoly.node.
 //    console.log("triggered" , this.refs.def.node.children[0].getClientRect());
-    console.log("trans" , this.refs.def.node.children[0].getTransform());
+  //  console.log("trans" , this.refs.def.node.children[0].getTransform());
     let divBounds = this.refs.def.node.children[0].getClientRect();
     let dataURL = this.refs.def.node.toDataURL(divBounds);
     //dataURL = this.refs.canPoly.node.getLayer().getCanvas().toDataURL();
@@ -110,7 +110,7 @@ componentDidMount() {
    // this.scaleFactor = 2;
     
     let radShad = parseInt(this.props.radius) + parseInt(this.props.shadow);
-    console.log(radShad);
+  //  console.log(radShad);
     
     this.canPolyProps = {
         sides : this.props.sides,
@@ -138,7 +138,7 @@ componentDidMount() {
     this.refs.def.node.children[0].shadowColor(this.canPolyProps.shadowColor);
     this.refs.def.node.draw();
     this.canBounds = this.refs.def.node.children[0].getClientRect();
-    console.log(this.canBounds , divBounds);
+   // console.log(this.canBounds , divBounds);
     this.refs.domScaler.style.transition = 'all .3s';
     this.refs.domParent.style.transitionDelay = '.5s';
    // this.refs.def.node.children[0].rotate(this.canPolyProps.roty);
@@ -204,7 +204,7 @@ componentDidMount() {
 
     if(this.props.parentRef !== undefined){
        this.props.parentRef[this.props.name] = this;
-       console.log("parent set");
+  //     console.log("parent set");
     }
     //ff.style.background='url('+dataURL+')';
    // var polyNode = this.refs.canPoly.node;
@@ -212,8 +212,8 @@ componentDidMount() {
     this.setState({
         sample: 1
     },function(){
-        console.log(BBB.refs.def.node.children[0].getClientRect());
-        console.log(BBB.refs.domPoly.getBoundingClientRect());
+//        console.log(BBB.refs.def.node.children[0].getClientRect());
+  //      console.log(BBB.refs.domPoly.getBoundingClientRect());
         // BBB.refs.def.node.children[0].rotate(20);
         // BBB.refs.def.node.draw();
         // console.log(BBB.refs.def.node.children[0].getClientRect());

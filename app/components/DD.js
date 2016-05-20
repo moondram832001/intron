@@ -101,11 +101,11 @@ handleMouseOut = () => {
 
 componentDidMount(){
   let divBounds = this.refs.def.node.children[0].getClientRect();
-  console.log(this.refs.def.node.children[0].getCanvas());
+  //console.log(this.refs.def.node.children[0].getCanvas());
   let dataURL = this.refs.def.node.toDataURL(divBounds);
   let dataURLOne = this.refs.fed.node.toDataURL(divBounds);
   let radShad = parseInt(this.props.radius) + parseInt(this.props.shadow);
-  console.log(radShad);
+ // console.log(radShad);
     
     this.canPolyProps = {
         sides : this.props.sides,
@@ -149,7 +149,7 @@ componentDidMount(){
     
     
     this.canBounds = this.refs.def.node.children[0].getClientRect();
-    console.log(this.canBounds , divBounds);
+  //  console.log(this.canBounds , divBounds);
    // this.refs.domScaler.style.transition = 'all .3s';
    this.refs.domParent.style.transition = 'all 1s';
    this.refs.domPoly.style.transition = 'all 1s';
@@ -240,7 +240,7 @@ componentDidMount(){
     },function(){
      //   console.log(BBB.refs.def.node.children[0].getClientRect());
      //   console.log(BBB.refs.domPoly.getBoundingClientRect());
-        console.log(BBB.refs.domIcon.offsetWidth , BBB.refs.domIcon.offsetHeight);
+   //     console.log(BBB.refs.domIcon.offsetWidth , BBB.refs.domIcon.offsetHeight);
         // BBB.refs.def.node.children[0].rotate(20);
         // BBB.refs.def.node.draw();
         // console.log(BBB.refs.def.node.children[0].getClientRect());
@@ -249,7 +249,7 @@ componentDidMount(){
 }
 
 componentWillMount(){
-    console.log("will mount" , this.props.width);
+ //   console.log("will mount" , this.props.width);
     this.canPolyProps = {
         sides : this.props.sides,
         opacityValue : 1,

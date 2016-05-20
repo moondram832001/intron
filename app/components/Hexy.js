@@ -44,7 +44,7 @@ static defaultProps = {
          left: IconPos[0] - 25 + 'px',
          top: IconPos[1] - 25 + 'px',
       };
-      console.log("initing" , sibling);
+   //   console.log("initing" , sibling);
     });
 
     this.regularPolyObject['backShadowPoly'].refs.domParent.style.transition = 'transform 0s';

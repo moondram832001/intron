@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import Burffee from '../components/Burffee'
 import CC from '../components/CC'
 import Hexy from '../components/Hexy'
-import Polaron from '../components/Polaron'
 import Cropper from 'cropperjs';
 import 'cropperjs';
 import 'cropperjs/dist/cropper.css';
@@ -154,7 +153,8 @@ componentDidMount() {
        
           <Burffee  src={this.state.preview} sides={6}  radius={100} rotation={-30} xPos="500" yPos="350" curveFactor="10" />
           <Hexy xPos={465} yPos={650} />
-          <Polaron />
+         
+         
       </div>
     )
   }

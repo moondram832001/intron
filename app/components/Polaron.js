@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import math from 'mathjs';
 import ReactKonva from './ReactKonva';
 
-let {Stage, Layer, Rect, Star, Circle,Path} = ReactKonva;
+let {Stage, Layer, Rect, Star, Group,Circle,Path,FastLayer} = ReactKonva;
 
 class Polaron extends Component {
 
@@ -52,6 +52,27 @@ class Polaron extends Component {
      return pathData;
   }
   
+  getBezierPath(pointArray){
+     let pathData = "";
+     
+     for(var i=0; i < pointArray.length - 2; i++) {
+        //console.log(pointArray[i].valueOf(),i);
+        let endPoint = pointArray[i].valueOf();
+        let cPointOne = pointArray[i+1].valueOf();
+        let cPointTwo = pointArray[i+2].valueOf();
+        //pathData += 
+        if(i === 0 ) {
+          pathData += "M" + endPoint[0] + " " + endPoint[1];
+        }
+        else {
+          pathData += " C" + cPointOne[0] + "," + cPointOne[1] + " "+ cPointTwo[0] + "," + cPointTwo[1] +" "+ endPoint[0] + "," + endPoint[1];
+        }
+     }
+     pathData += " Z";
+     return pathData;
+  }
+  
+  
   polyRotate(polyArray,rotationAngle){
       let rotationMatrix = math.matrix([[this.getCos(rotationAngle), this.getSin(rotationAngle)], [-this.getSin(rotationAngle), this.getCos(rotationAngle)]]);   
       let polyRotated = [];
@@ -70,13 +91,13 @@ class Polaron extends Component {
       return math.multiply(polyMatrix,rotationMatrix).valueOf();
   }
   
-  getTransformedPolyArray(baseMatrix,angle,offset){
+  getTransformedPolyArray(baseMatrix,angle,offsetX,offsetY){
     let polyRotated = this.polyRotation(baseMatrix,angle);
     
     let offsetPoly = [];
   
     for(var i=0; i <polyRotated.length; i++) {
-      offsetPoly.push(math.add([offset,offset],math.matrix(polyRotated[i])));
+      offsetPoly.push(math.add([offsetX,offsetY],math.matrix(polyRotated[i])));
     }
     return offsetPoly;
   }
@@ -84,7 +105,7 @@ class Polaron extends Component {
   
 // x: 240,
 //   y: 40,
-//   data: 'M12.582,9.551C3.251,16.237,0.921,29.021,7.08,38.564l-2.36,1.689l4.893,2.262l4.893,2.262l-0.568-5.36l-0.567-5.359l-2.365,1.694c-4.657-7.375-2.83-17.185,4.352-22.33c7.451-5.338,17.817-3.625,23.156,3.824c5.337,7.449,3.625,17.813-3.821,23.152l2.857,3.988c9.617-6.893,11.827-20.277,4.935-29.896C35.591,4.87,22.204,2.658,12.582,9.551z',
+//   data: 'M12.582,9.551C3.251,16.237,0.921,29.021,7.08,38.564l-2.36,1.689l4.893,2.262l4.893,2.262l-0.568-5.36l-0.567-5.359l-2.365,1.694c-4.657-7.375-2.83-17.185,4.352-22.33c7.451-5.338,17.817-3.625,23.156,3.824c5.337,7.449,3.625,17.813-3.821,23.152l2.857,3.988c9.617-6.893,11.827-20.277,4.935-29.896C35.591,4.87,22.204,2.658,12.582,9.551z',
 //   fill: 'green',
 //   scale: 2
 
@@ -135,8 +156,16 @@ class Polaron extends Component {
 
     let rotationAngle = -90;
     let rotationMatrix = math.matrix([[this.getCos(rotationAngle), this.getSin(rotationAngle)], [-this.getSin(rotationAngle), this.getCos(rotationAngle)]]);   
-
-    let lowPolyArray = math.matrix([[0, 0] , [100, 200] , [200, 200] , [250, 100] , [20, 100]]);
+    let polyPoints = [];
+    
+    polyPoints.push([0,0]);
+    
+    for(var i=0; i < 5; i++){
+        polyPoints.push([10 + Math.floor(Math.random() * 50) , 10 + Math.floor(Math.random() * 50)]);
+    }
+    
+    //let lowPolyArray = math.matrix([[0, 0] , [0, 200] , [200, 200] , [250, 100] , [20, 100]]);
+    let lowPolyArray = math.matrix(polyPoints);
     let ff = [];
     
     for(var i=0; i < lowPolyArray._data.length; i++) {
@@ -185,9 +214,9 @@ class Polaron extends Component {
       dd.push(math.add([300,300],math.matrix(bk[i])));
     }
     
-    console.log(ak,bk);
+  //  console.log(ak,bk);
     
-    console.log(this.polyRotation(basePolyMatrix,"10"));
+  //  console.log(this.polyRotation(basePolyMatrix,"10"));
     
   //  let yy = this.polyRotation(basePolyMatrix,"180");
   //  let zz = this.polyRotation(basePolyReflectMatrix,"180");
@@ -224,11 +253,12 @@ class Polaron extends Component {
     
     let pathDataArray = [];
     let pathDataMirrorArray = [];
-    let pathDataList = []
+    let pathDataList = [];
+    let sideCount = 6;
     
-    for(var i=0 ; i < 6 ; i++) {
-       pathDataArray[i] = this.getPolygonPath(this.getTransformedPolyArray(basePolyMatrix,i * 60,300));  
-       pathDataMirrorArray[i] = this.getPolygonPath(this.getTransformedPolyArray(basePolyReflectMatrix, i * 60,300));
+    for(var i=0 ; i < sideCount ; i++) {
+       pathDataArray[i] = this.getBezierPath(this.getTransformedPolyArray(basePolyMatrix,i * 360/sideCount,this.props.xPos,this.props.yPos));  
+       pathDataMirrorArray[i] = this.getBezierPath(this.getTransformedPolyArray(basePolyReflectMatrix, i * 360/sideCount,this.props.xPos,this.props.yPos));
        pathDataList.push([pathDataArray[i],pathDataMirrorArray[i]]);
     }
     
@@ -241,30 +271,42 @@ class Polaron extends Component {
     
     
     return ( 
-        <Stage height={1000} width={1000}>
-              {pathDataList.map(function(pathData,i){
-                return <Layer key={i}>
-                  <Path x="0" y="0" 
-                  data={pathData[0]}
-                  fill="green"
-                  scaleX="1"
-                  rotation="0"
-                  offsetX="0"
-                  offsetY="0"
-                  opacity=".5"
-                  />
-                  <Path x="0" y="0" 
-                  data={pathData[1]}
-                  fill="green"
-                  scaleX="1"
-                  rotation="0"
-                  offsetX="0"
-                  offsetY="0"
-                  opacity=".5"
-                  />
-              </Layer>;
-              })}
-        </Stage>
+       <Group>
+            {pathDataList.map(function(pathData,i){
+              return <Group key={i}>
+                <Path  x="0" y="0" 
+                data={pathData[0]}
+                fill="black"
+                scaleX="1"
+                scaleY="1"
+                rotation="0"
+                offsetX="0"
+                offsetY="0"
+                opacity=".7"
+                shadowColor= '#fff'
+                shadowBlur= '0'
+                shadowOffsetX= "0"
+                shadowOffsetY= "0"
+                shadowOpacity= '1'
+                />
+                <Path x="0" y="0" 
+                data={pathData[1]}
+                fill="black"
+                scaleX="1"
+                scaleY="1"
+                rotation="0"
+                offsetX="0"
+                offsetY="0"
+                opacity=".7"
+                shadowColor= '#fff'
+                shadowBlur= '0'
+                shadowOffsetX= "0"
+                shadowOffsetY= "0"
+                shadowOpacity= '1'
+                />
+              </Group>
+            })}
+        </Group>
     );
   }
 }
