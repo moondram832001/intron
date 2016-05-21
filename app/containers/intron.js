@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 
 import Burffee from '../components/Burffee'
+import Bruf from '../components/Bruf'
 import CC from '../components/CC'
 import Hexy from '../components/Hexy'
 import Cropper from 'cropperjs';
@@ -21,11 +22,15 @@ constructor(props) {
 }
 
 static propTypes = {
-  src: React.PropTypes.string
+  src: React.PropTypes.string,
+  imageWidth: React.PropTypes.string,
+  imageHeight: React.PropTypes.string
 };
 
 static defaultProps = {
-  src : "https://res.cloudinary.com/moondram832001/image/upload/v1459251557/sea-241665_1280_kde4ht.jpg"
+  src : "https://res.cloudinary.com/moondram832001/image/upload/v1459251557/sea-241665_1280_kde4ht.jpg",
+  imageWidth: '600',
+  imageHeight : '300'
 };
 
 
@@ -70,6 +75,7 @@ static defaultProps = {
 //   return canvas;
 // }
 
+
 componentDidMount() {
      //console.log(this);
      var intronRef = this;
@@ -79,18 +85,22 @@ componentDidMount() {
           guides: false,
           highlight: false,
           viewMode: 1,
+          dragMode: 'none',
+          minCropBoxWidth: 40,
+          minCropBoxHeight: 40,
+          cropBoxResizable: false,
+  //        background: false,
           built: function () {
    //         croppable = true;
           },
           crop: function(){
    //         console.log(intronRef);
-            let croppedCanvas = intronRef.cropper.getCroppedCanvas();
+    //        let croppedCanvas = intronRef.cropper.getCroppedCanvas();
      //       let polygonCanvas = intronRef.getPolygonCanvas(croppedCanvas);
-            intronRef.setState({
-          //     preview: intronRef.cropper.getCroppedCanvas().toDataURL()
-              preview: croppedCanvas,
-              width: croppedCanvas.width
-            });
+            // intronRef.setState({
+            //   preview: croppedCanvas,
+            //   width: croppedCanvas.width
+            // });
           }
       };
       // for (var prop in this.props) {
@@ -99,6 +109,14 @@ componentDidMount() {
       //    }
       // }
       this.cropper = new Cropper(this.refs.img, options);
+    //  console.log(this.cropper.getCropBoxData());
+      let cropRadius = 30;
+      this.cropper.setCropBoxData({
+        left: this.props.imageWidth/2 - cropRadius, 
+        top: this.props.imageHeight/2 - cropRadius, 
+        width: 2 * cropRadius,
+        height: 2 * cropRadius
+      });
      
 }
 
@@ -121,6 +139,7 @@ componentDidMount() {
 
   render() {
 
+    
     let sides = 3;
 
     let radius = 189;
@@ -139,10 +158,13 @@ componentDidMount() {
       carry.push(250 + (cradius*Math.cos(a*i)));
       carry.push(250 + (cradius*Math.sin(a*i)));
     }
-
+  //<Burffee  src={this.state.preview} sides={6}  radius={100} rotation={-30} xPos="500" yPos="350" curveFactor="10" />
+  //<Hexy src={this.state.preview} xPos={465} yPos={650} curveFactor="10" rotation={-30} radius={100} sides={6} />
+  
+  //  <Burffee  src={this.state.preview} sides={6}  radius={100} rotation={-30} xPos="500" yPos="350" curveFactor="10" />
     return (
       <div >
-        <div style={{  height: 300,   width: '70%'}}>
+        <div style={{  height: this.props.imageHeight + 'px',   width: this.props.imageWidth + 'px' , marginLeft:'auto' , marginRight: 'auto'}}>
           <img
           ref="img"
           src={this.props.src}
@@ -150,11 +172,8 @@ componentDidMount() {
           />
             <img style={{ width: '100%' }} />
         </div>
-       
-          <Burffee  src={this.state.preview} sides={6}  radius={100} rotation={-30} xPos="500" yPos="350" curveFactor="10" />
-          <Hexy xPos={465} yPos={650} />
-         
-         
+      
+        <Hexy src={this.state.preview} xPos={465} yPos={500} rotation={-30} curveFactor="10" sides={6} />
       </div>
     )
   }

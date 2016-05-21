@@ -173,7 +173,7 @@ componentDidMount(){
         top: '0px',
         left: '0px',
         background:'url('+ dataURL +')',
-        zIndex: '-1',
+        zIndex: this.props.level,
         transformOrigin: '0% 0%',
         transform: 'scale(' + 1/this.scaleFactor + ',' + 1/this.scaleFactor + ')'
       //transform: 'scale(1,1)'
@@ -188,7 +188,7 @@ componentDidMount(){
         top: '0px',
         left: '0px',
         background:'url('+ dataURLOne +')',
-        zIndex: '-1',
+        zIndex: this.props.level,
         transformOrigin: '0% 0%',
         transform: 'scale(' + 1/this.scaleFactor + ',' + 1/this.scaleFactor + ')',
         opacity: 0
@@ -209,7 +209,7 @@ componentDidMount(){
     this.domParentProps={
         WebkitBackfaceVisibility: 'hidden',
         position: 'absolute',
-        zIndex: '-1',
+        zIndex: this.props.level,
         width:divBounds.width/this.scaleFactor + 'px',
         height: divBounds.height/this.scaleFactor + 'px',
         top:  this.canPolyProps.yPos + 'px',
@@ -276,7 +276,7 @@ componentWillMount(){
         transformOrigin: "50% 50%",
         //left: 300 - 25 + 'px',
         //top: 200 - 25 + 'px',
-        zIndex: -1,
+        zIndex: this.props.level,
         textAlign: 'center',
         opacity: 0
     };
@@ -323,7 +323,10 @@ render() {
                     closed={true} 
                     scaleX={this.canPolyProps.scale} scaleY={this.canPolyProps.scale} 
                     rotation={this.canPolyProps.roty} 
-                    offsetX="0" offsetY="0"  />
+                    offsetX="0" offsetY="0" 
+                    stroke={this.canPolyProps.filler}
+                    strokeWidth={0}
+                    />
                
              </Layer>
              <Layer ref="fed">
@@ -341,7 +344,10 @@ render() {
                     onMouseDown={this.props.MouseDown}
                     onMouseUp={this.props.MouseUp}
                     onClick={this.props.onClick}
-                    offsetX="0" offsetY="0" attry={this.props.key} />
+                    offsetX="0" offsetY="0" attry={this.props.key}
+                    stroke={this.canPolyProps.filler}
+                    strokeWidth={0}
+                    />
              </Layer>
         </div>
     );

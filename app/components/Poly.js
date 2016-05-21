@@ -31,7 +31,9 @@ static defaultProps = {
     transformOriginX : "50",
     transformOriginY : "50",
     scaleX: "1",
-    scaleY: "1"
+    scaleY: "1",
+    strokeColor: 'transparent',
+    strokeWidth: '0'
 };
 
 
@@ -123,7 +125,9 @@ componentDidMount() {
         offX : ((this.props.transformOriginX/100) *  2 * radShad) - radShad,
         offY : ((this.props.transformOriginY/100) *  2 * radShad) - radShad,
         shadow: this.props.shadow,
-        shadowColor: '#999'
+        shadowColor: '#999',
+        stroke:this.props.strokeColor,
+        strokeWidth:parseInt(this.props.strokeWidth)
     };
     
     this.refs.def.node.children[0].opacity(this.canPolyProps.opacityValue);
@@ -227,14 +231,16 @@ componentWillMount(){
         sides : this.props.sides,
         opacityValue : 1,
         rady : this.props.radius * this.scaleFactor,
-        filler: "#fff",
+        filler: this.props.fillColor,
         xPos: this.props.width/2,
         yPos: this.props.height/2,
         roty : 0,
         offX : 0,
         offY : 0,
         shadow: this.props.shadow * this.scaleFactor,
-        shadowColor: '#999'
+        shadowColor: '#999',
+        strokeColor: this.props.strokeColor,
+        strokeWidth: parseInt(this.props.strokeWidth)
     };
 }
 
@@ -293,6 +299,8 @@ render() {
                     shadowOffsetX="0"
                     shadowOffsetY="0"
                     shadowOpacity="1"
+                    stroke={this.canPolyProps.strokeColor}
+                    strokeWidth={this.canPolyProps.strokeWidth}
                 />
             </Layer>
         </div>

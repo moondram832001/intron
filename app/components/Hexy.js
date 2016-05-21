@@ -5,6 +5,7 @@ import DD from './DD';
 import Poly from './Poly';
 
 import {rgbToHsl,getRadialCoords} from './Utils';
+import {getPolygonCanvas} from './Utils';
 
 let {Stage, Layer, Rect, Star, Circle,RegularPolygon,Path} = ReactKonva;
 
@@ -17,6 +18,7 @@ class Hexy extends Component {
     this.clickFlag = 0;
     this.siblingsObject = {};
     this.regularPolyObject = {};
+    this.polyPointsObject = {};
   }
   
   
@@ -44,7 +46,7 @@ static defaultProps = {
          left: IconPos[0] - 25 + 'px',
          top: IconPos[1] - 25 + 'px',
       };
-   //   console.log("initing" , sibling);
+      console.log("initing" , sibling);
     });
 
     this.regularPolyObject['backShadowPoly'].refs.domParent.style.transition = 'transform 0s';
@@ -61,6 +63,10 @@ static defaultProps = {
   
   componentWillMount() {
   //   this.props.domPolyOffset = this.props.radius + this.props.padding;
+   this.canvasRef = document.createElement('canvas');
+    this.canvasRef.id="hexyCanvas";
+    this.canvasRef.style.width="100%";
+    this.canvasRef.style.display="none";
   }
   
   handleMouseDown = () => {
@@ -168,12 +174,23 @@ static defaultProps = {
       this.regularPolyObject['backShadowPoly'].refs.domParent.style.transition = 'all 1s ';
       this.regularPolyObject['backShadowPoly'].refs.domParent.style.transform = 'scale(.5,.5)';
       this.regularPolyObject['backShadowPoly'].refs.domParent.style.opacity = 0;
+      
+      this.regularPolyObject['frontButtonBackground'].refs.domParent.style.transition = 'all 1s ';
+      this.regularPolyObject['frontButtonBackground'].refs.domParent.style.transform = 'scale(1,1)';
 
-      this.regularPolyObject['frontButton'].refs.domParent.style.transition = 'all 1s ';
-      this.regularPolyObject['frontButton'].refs.domParent.style.transform = 'scale(1,1)';
+      this.regularPolyObject['frontButtonBackground'].refs.def.node.children[0].radius("100");
+      this.regularPolyObject['frontButtonBackground'].refs.def.node.draw();
+      
+      this.refs.imagy.style.transition =   'all 1s';
+      this.refs.imagy.style.transform =  'scale(.8,.8)';
 
-      this.regularPolyObject['frontButton'].refs.def.node.children[0].radius("100");
-      this.regularPolyObject['frontButton'].refs.def.node.draw();
+    //   this.regularPolyObject['frontButton'].refs.domParent.style.transition = 'all 1s ';
+    //   this.regularPolyObject['frontButton'].refs.domParent.style.transform = 'scale(1,1)';
+
+    //   this.regularPolyObject['frontButton'].refs.def.node.children[0].radius("100");
+    //   this.regularPolyObject['frontButton'].refs.def.node.draw();
+      
+      
 
   }
   
@@ -212,24 +229,60 @@ static defaultProps = {
       this.regularPolyObject['backShadowPoly'].refs.domParent.style.transition = 'all 1s';
       this.regularPolyObject['backShadowPoly'].refs.domParent.style.transform = 'scale(.75,.75)';
       this.regularPolyObject['backShadowPoly'].refs.domParent.style.opacity = 1;
-
-      this.regularPolyObject['frontButton'].refs.domParent.style.transition = 'all 1s';
-      this.regularPolyObject['frontButton'].refs.domParent.style.transform = 'scale(.75,.75)';
+      
+      this.regularPolyObject['frontButtonBackground'].refs.domParent.style.transition = 'all 1s';
+      this.regularPolyObject['frontButtonBackground'].refs.domParent.style.transform = 'scale(.75,.75)';
 
     //  this.regularPolyObject['frontButton'].refs.def.node.children[0].scaleY(.75);
-      this.regularPolyObject['frontButton'].refs.def.node.children[0].radius("75");
-      this.regularPolyObject['frontButton'].refs.def.node.draw();
+      this.regularPolyObject['frontButtonBackground'].refs.def.node.children[0].radius("75");
+      this.regularPolyObject['frontButtonBackground'].refs.def.node.draw();
+      
+      this.refs.imagy.style.transition =   'all 1s';
+      this.refs.imagy.style.transform =  'scale(.55,.55)';
+
+    //   this.regularPolyObject['frontButton'].refs.domParent.style.transition = 'all 1s';
+    //   this.regularPolyObject['frontButton'].refs.domParent.style.transform = 'scale(.75,.75)';
+
+    // //  this.regularPolyObject['frontButton'].refs.def.node.children[0].scaleY(.75);
+    //   this.regularPolyObject['frontButton'].refs.def.node.children[0].radius("75");
+    //   this.regularPolyObject['frontButton'].refs.def.node.draw();
+     
+     
+      
   }
 
   render() {
-     let {width,height} = this.props;
+     let {width,height,src} = this.props;
      let domPolyOffset = this.props.radius + this.props.padding; 
      let domPolyAbsPosY = domPolyOffset + this.props.yPos;
      let domPolyAbsPosX = domPolyOffset + this.props.xPos;
+     let ImageSrc = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+    
+    if(src){
+         ImageSrc = getPolygonCanvas(src,this.canvasRef,this.props.sides,this.props.rotation,this.props.curveFactor,this.polyPointsObject);    
+     }
      
+    let styleImg = {
+      width: (4 * this.props.radius) + 'px',
+      position:'absolute',
+      height : (4 * this.props.radius) + 'px',
+      zIndex : -1 ,
+      opacity : '1' ,
+      top:  domPolyOffset -  (2 * this.props.radius) +  "px",
+      left: domPolyOffset - (2 * this.props.radius) +  "px",
+      transform: 'scale(.80,.80)'
+    };
+    
+    // //<Poly xx={domPolyOffset} yy={domPolyOffset} sides="6" radius="100" rotation="0" offsetX="0" offsetY="0" parentRef={this.regularPolyObject}
+    //       transformOriginX="50" transformOriginY="0" shadow="0" onClick={this.handleClick} level="-1"  listen={true} name="frontButton"
+    //       fillColor="transparent" strokeColor="white" strokeWidth="0"
+    //       />
+    let canvasSize = 6 * this.props.radius;
+    
     return ( 
-       <div style={{ position: 'absolute', top: this.props.yPos + 'px' , left: this.props.xPos + 'px' }} >  
-        <Plat width={6 * this.props.radius + 50} height={6 * this.props.radius + 50} >
+       <div style={{ position: 'absolute', top: this.props.yPos + 'px' , left:  'calc(50% - ' + canvasSize/2 + 'px)' }} >  
+        
+        <Plat width={canvasSize } height={canvasSize} >
         
          <DD xx={domPolyOffset} yy={domPolyOffset}  radius={this.props.radius} rotation="30" offsetX="0" offsetY="0" 
            transformOriginX="50" transformOriginY="0" shadow="0" fill="#ff0000" rot="10" MouseOver={this.handleMouseOver}
@@ -242,7 +295,8 @@ static defaultProps = {
            activeColor="#ff7777"
            icon="fa fa-times"
            key="1" 
-         />
+           level="-3"
+           />
          
          <DD xx={domPolyOffset} yy={domPolyOffset}  radius={this.props.radius} rotation="150" offsetX="0" offsetY="0" 
            transformOriginX="50" transformOriginY="0" shadow="0" fill="#ff0000" rot="10" MouseOver={this.handleMouseOver}
@@ -255,6 +309,7 @@ static defaultProps = {
            activeColor="#777"
            icon="fa fa-twitter"
            key="2"
+           level="-3"
          />
          
          <DD xx={domPolyOffset} yy={domPolyOffset}  radius={this.props.radius} rotation="270" offsetX="0" offsetY="0" 
@@ -268,15 +323,17 @@ static defaultProps = {
            activeColor="#777"
            icon="fa fa-github"
            key="3"
+           level="-3"
          />
-         
-          <Poly xx={domPolyOffset} yy={domPolyOffset} sides="6" radius="100" rotation="0" offsetX="0" offsetY="0" parentRef={this.regularPolyObject}
-           transformOriginX="50" transformOriginY="0" shadow="5" onClick={this.handleClick} level="-1"  listen={true} name="frontButton"
+          <Poly xx={domPolyOffset} yy={domPolyOffset} sides="6" radius={4 * this.props.radius} rotation="0" offsetX="0" offsetY="0" scaleParent=".5"
+           transformOriginX="50" transformOriginY="0" shadow="5" level="-5" listen={false} parentRef={this.regularPolyObject} name="backShadowPoly"
+           fillColor="white" strokeColor="white" strokeWidth="0"
           />
-           <Poly xx={domPolyOffset} yy={domPolyOffset} sides="6" radius="200" rotation="0" offsetX="0" offsetY="0" scaleParent=".5"
-           transformOriginX="50" transformOriginY="0" shadow="5" level="-2" listen={false} parentRef={this.regularPolyObject} name="backShadowPoly"
+           <img ref="imagy" style={ styleImg }  src={ ImageSrc }/>
+           <Poly xx={domPolyOffset} yy={domPolyOffset} sides="6" radius={2 * this.props.radius} rotation="0" offsetX="0" offsetY="0" parentRef={this.regularPolyObject}
+           transformOriginX="50" transformOriginY="0" shadow="5" level="-2"  listen={true} name="frontButtonBackground" onClick={this.handleClick}
+           fillColor="white" strokeColor="white" strokeWidth="0"
           />
-        
       </Plat>
       </div>
     );

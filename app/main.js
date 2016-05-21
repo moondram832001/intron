@@ -2,6 +2,8 @@ import ReactDOM from 'react-dom'
 import React from 'react'
 import Intron from './containers/intron'
 import BB from './components/BB'
+//import Hexy from './components/Hexy'
+
 
 import IntronDemo from './components/IntronDemo'
 import Polaron from './components/Polaron'
