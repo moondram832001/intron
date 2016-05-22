@@ -213,11 +213,11 @@ componentDidMount(){
         width:divBounds.width/this.scaleFactor + 'px',
         height: divBounds.height/this.scaleFactor + 'px',
         top:  this.canPolyProps.yPos + 'px',
-        left: (this.canPolyProps.xPos - transformFactor) + 'px',
+        left: (this.canPolyProps.xPos - this.props.transformOriginX) + 'px',
         transform: transformString,
-        //transformOrigin: this.props.transformOriginX + "%  " + this.props.transformOriginY + "%"
+        transformOrigin: this.props.transformOriginX + "px  " + this.props.transformOriginY + "px"
         //transformOrigin: "105px 91px",
-        transformOrigin: transformFactor + "px 0px"
+        //transformOrigin: transformFactor + "px 0px"
     };
     
     
@@ -281,8 +281,15 @@ componentWillMount(){
         opacity: 0
     };
     
-    this.props.siblings.push(this);
-    this.props.siblingsObject[this.props.key] = this;
+    //TBD : need top remove this
+    if(this.props.siblings){
+        this.props.siblings.push(this);    
+    }
+    
+    if(this.props.siblingsObject){
+        this.props.siblingsObject[this.props.key] = this;    
+    }
+    
 
 }
 
@@ -319,7 +326,7 @@ render() {
                     fill={this.canPolyProps.filler}
                     x={this.canPolyProps.xPos} 
                     y={this.canPolyProps.yPos} 
-                    points={[0,0,100,0,50,86.6,-50,86.6]}
+                    points={this.props.points}
                     closed={true} 
                     scaleX={this.canPolyProps.scale} scaleY={this.canPolyProps.scale} 
                     rotation={this.canPolyProps.roty} 
@@ -334,7 +341,7 @@ render() {
                     fill={this.canPolyProps.piller}
                     x={this.canPolyProps.xPos} 
                     y={this.canPolyProps.yPos} 
-                    points={[0,0,100,0,50,86.6,-50,86.6]}
+                    points={this.props.points}
                     closed={true} 
                     scaleX={this.canPolyProps.scale} 
                     scaleY={this.canPolyProps.scale} 

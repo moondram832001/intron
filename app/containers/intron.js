@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 
+import DD from '../components/DD';
 import Burffee from '../components/Burffee'
-import Bruf from '../components/Bruf'
+import Plat from '../components/Plat';
 import CC from '../components/CC'
 import Hexy from '../components/Hexy'
 import Cropper from 'cropperjs';
@@ -74,7 +75,13 @@ static defaultProps = {
 
 //   return canvas;
 // }
+handleMouseOut = (e) => {
+      console.log("out",e);
+}
 
+handleMouseOver = (e) => {
+         console.log("over",0);
+}
 
 componentDidMount() {
      //console.log(this);
@@ -172,7 +179,6 @@ componentDidMount() {
           />
             <img style={{ width: '100%' }} />
         </div>
-      
         <Hexy src={this.state.preview} xPos={465} yPos={500} rotation={-30} curveFactor="10" sides={6} />
       </div>
     )

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import ReactKonva from './ReactKonva';
 import Intron from '../containers/intron';
 import Polarons from '../components/Polarons';
+import Plat from '../components/Plat';
+import DD from '../components/DD';
 
 let {Stage, Layer, Rect, Star, Circle,RegularPolygon} = ReactKonva;
 
@@ -61,6 +63,19 @@ class IntronDemo extends Component {
     return ( 
         <div>
             {sampletag}
+            <div style={{ position: 'absolute', top: 400 + 'px' , left:  500 + 'px)' }} >
+                <Plat width={300} height={300} >
+                  <DD xx={0} yy={0}  radius={50} rotation="0" offsetX="0" offsetY="0" 
+                     transformOriginX="0" transformOriginY="0" shadow="0" fill="#ff0000" rot="10"
+                     MouseOver={this.handleMouseOver}
+                     MouseOut={this.handleMouseOut}
+                     points={[0,0,100,0,100,100]}
+                     activeColor="#ff7777"
+                     icon="fa fa-times"
+                     level="-3"
+                     />
+                </Plat>   
+            </div>
             <div style={{ position: 'absolute' , top: '0px' , display :'none'}}>
                 <Polarons passToParent={this.getPolaronImage.bind(this)} ></Polarons>
             </div>
