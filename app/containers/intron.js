@@ -25,13 +25,15 @@ constructor(props) {
 static propTypes = {
   src: React.PropTypes.string,
   imageWidth: React.PropTypes.string,
-  imageHeight: React.PropTypes.string
+  imageHeight: React.PropTypes.string,
+  preview: React.PropTypes.object
 };
 
 static defaultProps = {
   src : "https://res.cloudinary.com/moondram832001/image/upload/v1459251557/sea-241665_1280_kde4ht.jpg",
   imageWidth: '600',
-  imageHeight : '300'
+  imageHeight : '300',
+  preview:null
 };
 
 
@@ -75,6 +77,7 @@ static defaultProps = {
 
 //   return canvas;
 // }
+
 handleMouseOut = (e) => {
       console.log("out",e);
 }
@@ -82,6 +85,8 @@ handleMouseOut = (e) => {
 handleMouseOver = (e) => {
          console.log("over",0);
 }
+
+
 
 componentDidMount() {
      //console.log(this);
@@ -95,14 +100,17 @@ componentDidMount() {
           dragMode: 'none',
           minCropBoxWidth: 40,
           minCropBoxHeight: 40,
-          cropBoxResizable: false,
+          cropBoxResizable: true,
   //        background: false,
           built: function () {
    //         croppable = true;
+   console.log(" i was buile afetr  mount");
+            //this.cropper.crop();
           },
           crop: function(){
-   //         console.log(intronRef);
-    //        let croppedCanvas = intronRef.cropper.getCroppedCanvas();
+          //  console.log("cropped");
+          //  let croppedCanvas = intronRef.cropper.getCroppedCanvas();
+            intronRef.props.passToParent(intronRef.cropper);
      //       let polygonCanvas = intronRef.getPolygonCanvas(croppedCanvas);
             // intronRef.setState({
             //   preview: croppedCanvas,
@@ -124,6 +132,8 @@ componentDidMount() {
         width: 2 * cropRadius,
         height: 2 * cropRadius
       });
+
+      this.props.passToParent(this.cropper);
      
 }
 
@@ -143,6 +153,64 @@ componentDidMount() {
 //            <img style={{ width: '100%' }} src={this.state.preview} />
 //         </div>
 // }
+
+// shouldComponentUpdate(){
+//   return false;
+// }
+ 
+  shouldComponentUpdate(){
+      //return true;
+      return (this.props.refresh);
+  }
+
+  componentDidUpdate() {
+  //  console.log(this.refs.polaronRef.node.getCanvas());
+    console.log("intron updated");
+  //     var intronRef = this;
+
+  //     var options = {
+  //         aspectRatio: 1,
+  //         guides: false,
+  //         highlight: false,
+  //         viewMode: 1,
+  //         dragMode: 'none',
+  //         minCropBoxWidth: 40,
+  //         minCropBoxHeight: 40,
+  //         cropBoxResizable: false,
+  // //        background: false,
+  //         built: function () {
+  //           croppable = true;
+  //           console.log(" i was buile afetr  update");
+  //         },
+  //         crop: function(){
+  //  //         console.log(intronRef);
+  //   //        let croppedCanvas = intronRef.cropper.getCroppedCanvas();
+  //    //       let polygonCanvas = intronRef.getPolygonCanvas(croppedCanvas);
+  //           // intronRef.setState({
+  //           //   preview: croppedCanvas,
+  //           //   width: croppedCanvas.width
+  //           // });
+  //         }
+  //     };
+      // for (var prop in this.props) {
+      //    if (prop !== 'src' && prop !== 'alt' && prop !== 'crossOrigin') {
+      //       options[prop] = this.props[prop];
+      //    }
+      // }
+      if(this.props.refreshImage){
+         this.cropper.replace(this.props.src);  
+      }
+      
+    //  console.log(this.cropper.getCropBoxData());
+      // let cropRadius = 30;
+      // this.cropper.setCropBoxData({
+      //   left: this.props.imageWidth/2 - cropRadius, 
+      //   top: this.props.imageHeight/2 - cropRadius, 
+      //   width: 2 * cropRadius,
+      //   height: 2 * cropRadius
+      // });
+
+  }
 
   render() {
 
@@ -169,6 +237,7 @@ componentDidMount() {
   //<Hexy src={this.state.preview} xPos={465} yPos={650} curveFactor="10" rotation={-30} radius={100} sides={6} />
   
   //  <Burffee  src={this.state.preview} sides={6}  radius={100} rotation={-30} xPos="500" yPos="350" curveFactor="10" />
+  // <Hexy src={this.state.preview} xPos={465} yPos={500} rotation={-30} curveFactor="10" sides={6} />
     return (
       <div >
         <div style={{  height: this.props.imageHeight + 'px',   width: this.props.imageWidth + 'px' , marginLeft:'auto' , marginRight: 'auto'}}>
@@ -179,7 +248,7 @@ componentDidMount() {
           />
             <img style={{ width: '100%' }} />
         </div>
-        <Hexy src={this.state.preview} xPos={465} yPos={500} rotation={-30} curveFactor="10" sides={6} />
+       <Hexy src={this.props.preview} xPos={465} yPos={500} rotation={-30} curveFactor="10" sides={6} />
       </div>
     )
   }

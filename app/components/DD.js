@@ -289,6 +289,10 @@ componentWillMount(){
     if(this.props.siblingsObject){
         this.props.siblingsObject[this.props.key] = this;    
     }
+
+    this.clickHandle =function(){
+      console.log("hijhi");
+    }
     
 
 }
@@ -348,8 +352,6 @@ render() {
                     rotation={this.canPolyProps.roty} 
                     onMouseOver={this.handleMouseOver}
                     onMouseOut={this.handleMouseOut}
-                    onMouseDown={this.props.MouseDown}
-                    onMouseUp={this.props.MouseUp}
                     onClick={this.props.onClick}
                     offsetX="0" offsetY="0" attry={this.props.key}
                     stroke={this.canPolyProps.filler}

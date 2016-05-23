@@ -11,7 +11,11 @@ class Polaron extends Component {
   }
 
   componentDidMount() {
-     console.log(math.sqrt(4));
+ //    console.log(math.sqrt(4));
+  }
+
+  componentDidUpdate() {
+     console.log("polaron updated");
   }
 
   componentWillReceiveProps(newProps) {

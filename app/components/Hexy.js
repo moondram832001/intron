@@ -23,13 +23,15 @@ class Hexy extends Component {
   
   
 static propTypes = {
-  radius: React.PropTypes.number
+  radius: React.PropTypes.number,
+  src: React.PropTypes.object
 };
 
 static defaultProps = {
   radius : 50,
   padding: 100,
-  domPolyOffset:0
+  domPolyOffset:0,
+  src: null
 };
 
 
@@ -46,7 +48,7 @@ static defaultProps = {
          left: IconPos[0] - 25 + 'px',
          top: IconPos[1] - 25 + 'px',
       };
-      console.log("initing" , sibling);
+  //    console.log("initing" , sibling);
     });
 
     this.regularPolyObject['backShadowPoly'].refs.domParent.style.transition = 'transform 0s';
@@ -54,11 +56,23 @@ static defaultProps = {
   }
 
   componentWillReceiveProps(newProps) {
- 
+    console.log(" hexy was woken" , this.props.src);
   }
 
   componentWillUnmount() {
  
+  }
+
+  shouldComponentUpdate(){
+
+    return this.props.src ? true : false;
+
+    
+    //return false;
+  }
+
+  componentDidUpdate(){
+    console.log(" hexy was iupdated");
   }
   
   componentWillMount() {
@@ -258,7 +272,7 @@ static defaultProps = {
      let domPolyAbsPosX = domPolyOffset + this.props.xPos;
      let ImageSrc = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
     
-    if(src){
+     if(src){
          ImageSrc = getPolygonCanvas(src,this.canvasRef,this.props.sides,this.props.rotation,this.props.curveFactor,this.polyPointsObject);    
      }
      
@@ -282,7 +296,7 @@ static defaultProps = {
     return ( 
        <div style={{ position: 'absolute', top: this.props.yPos + 'px' , left:  'calc(50% - ' + canvasSize/2 + 'px)' }} >  
         
-        <Plat width={canvasSize } height={canvasSize} >
+        <Plat refresh={true} width={canvasSize } height={canvasSize} >
         
          <DD xx={domPolyOffset} yy={domPolyOffset}  radius={this.props.radius} rotation="30" offsetX="0" offsetY="0" 
            transformOriginX="50" transformOriginY="0" shadow="0" fill="#ff0000" rot="10" MouseOver={this.handleMouseOver}

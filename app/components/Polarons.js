@@ -8,15 +8,38 @@ class Polarons extends Component {
 
   constructor(props) {
     super(props);
+    this.refresh = true;
+    this.renderCount = 0;
   }
 
   componentDidMount() {
-    console.log(this.refs.polaronRef.node.getCanvas());
+  //  console.log(this.refs.polaronRef.node.getCanvas());
     this.img = this.refs.polaronRef.node.toDataURL();
     this.refs.polaronRef.node.opacity(1) ;
     this.refs.polaronRef.node.draw();
     this.props.passToParent(this.img);
   }
+
+  componentDidUpdate() {
+  //  console.log(this.refs.polaronRef.node.getCanvas());
+ //   console.log("polarons updated");
+ //   this.img = this.refs.polaronRef.node.toDataURL();
+ //   this.refs.polaronRef.node.opacity(1) ;
+ //   this.refs.polaronRef.node.draw();
+ //   this.props.passToParent(this.img);
+    this.img = this.refs.polaronRef.node.toDataURL();
+    this.refs.polaronRef.node.opacity(1) ;
+    this.refs.polaronRef.node.draw();
+    this.props.passToParent(this.img);
+  }
+
+  componentWillUpdate() {
+  //  console.log(this.refs.polaronRef.node.getCanvas());
+  //  console.log("polarons will be updated");
+   
+  }
+
+
 
   componentWillReceiveProps(newProps) {
  
@@ -29,12 +52,29 @@ class Polarons extends Component {
   componentWillMount(){
       
   }
+
+  componentWillUpdate(){
+ //   console.log('will upadt');  
+  }
+
+
+  componentWillReceiveProps(propy){
+  //  console.log('recvd props',propy);
+    this.refresh = propy.refresh;
+    if(this.renderCount === 1){
+      this.refresh = true;
+    }
+  }
   
   shouldComponentUpdate(){
-      return false;
+  //    console.log(" polarons contacted" , this.props.refresh);
+      return this.refresh;
+      //return true;
   }
   
   render() {
+  //     console.log("rendering polarons",this.renderCount);
+      this.renderCount++;
       let ff = Array.from(new Array(3),(val,index) => index+1)
                     .map(function(i){
                         return Array.from(new Array(7),(val,index) => [i,index+1])

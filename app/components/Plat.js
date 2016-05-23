@@ -14,11 +14,18 @@ class Plat extends Component {
   }
 
   componentWillReceiveProps(newProps) {
- 
+    console.log(newProps);
   }
 
   componentWillUnmount() {
  
+  }
+
+
+  shouldComponentUpdate(){ 
+      console.log(this.props);
+      return this.props.refresh;
+      // return true;
   }
 
   render() {
