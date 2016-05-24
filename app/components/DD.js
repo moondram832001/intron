@@ -41,7 +41,8 @@ static defaultProps = {
     transformOriginX : "50",
     transformOriginY : "50",
     scaleX: "1",
-    scaleY: "1"
+    scaleY: "1",
+    iconOpacity: 0
 };
 
 
@@ -208,6 +209,7 @@ componentDidMount(){
     
     this.domParentProps={
         WebkitBackfaceVisibility: 'hidden',
+        backfaceVisibility: 'hidden',
         position: 'absolute',
         zIndex: this.props.level,
         width:divBounds.width/this.scaleFactor + 'px',
@@ -278,7 +280,7 @@ componentWillMount(){
         //top: 200 - 25 + 'px',
         zIndex: this.props.level,
         textAlign: 'center',
-        opacity: 0
+        opacity: this.props.iconOpacity
     };
     
     //TBD : need top remove this
@@ -337,6 +339,8 @@ render() {
                     offsetX="0" offsetY="0" 
                     stroke={this.canPolyProps.filler}
                     strokeWidth={0}
+                    shadowColor={'#000'}
+                    shadowBlur={0}
                     />
                
              </Layer>

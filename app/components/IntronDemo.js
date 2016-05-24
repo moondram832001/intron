@@ -6,7 +6,8 @@ import Plat from '../components/Plat';
 import DD from '../components/DD';
 import Hexy from '../components/Hexy';
 
-let {Stage, Layer, Rect, Star, Circle,RegularPolygon} = ReactKonva;
+
+let {Stage, Layer, Rect, Star, Circle,RegularPolygon,Line} = ReactKonva;
 
 class IntronDemo extends Component {
 
@@ -182,46 +183,68 @@ class IntronDemo extends Component {
            width:'1300px',
            height: '1100px'
       };
-      let platState = this.state.refresh;
+   //   let platState = this.state.refresh;
     //let sampletag = this.renderCount === 0 ? <div>hello</div> : <Intron src={this.state.backy}></Intron>;
     let RenderComponent =  
-              <div>           
+              <div>      
+               <div style={{ position: 'relative' , top: '0px',height: '100px', marginLeft: '0px' , marginTop: '0px' }}>
+            </div>     
               <div style={{ position: 'absolute' , top: '0px' , display :'none'}}>
                 <Polarons refresh={this.state.refresh} passToParent={this.getPolaronImage.bind(this)} ></Polarons>
               </div>
-              
+              <div style={{ position: 'absolute', top: '-5' + 'px' , left:  'calc(50% - 305px)' , zIndex: '-5' }}>
+                <Plat refresh={!this.state.refresh} width={610} height={510} >
+                  <Layer ref="fed">
+                  <Line 
+                  fill={'#fff'}
+                  x={0}
+                  y={0}
+                  points={[5,55,55,5,555,5,605,55,605,455,555,505,55,505,5,455]}
+                  closed={true}
+                  shadowColor={'#999'}
+                  shadowBlur={5} 
+                  isListening={false}
+                  ></Line>
+                  </Layer>
+                </Plat>   
+            </div> 
               <div> 
-              <div style={{ position: 'absolute', top: '300' + 'px' , left:  '500' + 'px' }} >
-                <Plat refresh={!platState} width={300} height={200} >
+              <div style={{ position: 'absolute', top: '400' + 'px' , left:  'calc(50% - 300px)' }} >
+                <Plat refresh={!this.state.refresh} width={300} height={100} >
                   <DD xx={0} yy={0}  radius={50} rotation="0" offsetX="0" offsetY="0" 
                      transformOriginX="0" transformOriginY="0" shadow="0" fill="#ff0000" rot="10"
                      MouseOver={this.handleMouseOver}
                      MouseOut={this.handleMouseOut}
                      onClick={this.handleClick.bind(this)}
-                     points={[0,0,100,0,100,200]}
-                     activeColor="#ff7777"
+                     points={[0,0,300,0,300,100,50,100,0,50]}
+                     activeColor="#999"
                      icon="fa fa-times"
                      level="-3"
+                     iconOpacity={1}
                      />
                 </Plat>   
             </div>
-            <div style={{ position: 'absolute', top: '300' + 'px' , left:  '800' + 'px' }} >
-                <Plat refresh={!platState} width={300} height={200} >
+            <div style={{ position: 'absolute', top: '400' + 'px' , left:  '50%' }} >
+                <Plat refresh={!this.state.refresh} width={300} height={100} >
                   <DD xx={0} yy={0}  radius={50} rotation="0" offsetX="0" offsetY="0" 
                      transformOriginX="0" transformOriginY="0" shadow="0" fill="#ff0000" rot="10"
                      MouseOver={this.handleMouseOver}
                      MouseOut={this.handleMouseOut}
                      onClick={this.refreshIntronImage.bind(this)}
-                     points={[0,0,100,0,100,200]}
-                     activeColor="#ff7777"
+                     points={[0,0,300,0,300,50,250,100,0,100]}
+                     activeColor="#999"
                      icon="fa fa-times"
                      level="-3"
+                     iconOpacity={1}
                      /> 
-                </Plat>   
-            </div>
+                </Plat>  
+              </div>  
+              
+            
+            <div style={{ position: 'relative' , top: '0px',margin: '0px' }}>
                 <Intron refresh={!this.state.refresh } refreshImage={this.state.refreshImage} src={this.state.backy}  
-                preview={this.state.preview} passToParent={this.getCropperObject.bind(this)}  ></Intron>
-
+                preview={this.state.preview} passToParent={this.getCropperObject.bind(this)}></Intron>
+            </div>
             </div>
             </div>
             ;
