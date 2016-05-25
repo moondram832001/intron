@@ -19,6 +19,7 @@ class Hexy extends Component {
     this.siblingsObject = {};
     this.regularPolyObject = {};
     this.polyPointsObject = {};
+    this.iconStyleArray = [];
   }
   
   
@@ -78,9 +79,30 @@ static defaultProps = {
   componentWillMount() {
   //   this.props.domPolyOffset = this.props.radius + this.props.padding;
    this.canvasRef = document.createElement('canvas');
-    this.canvasRef.id="hexyCanvas";
-    this.canvasRef.style.width="100%";
-    this.canvasRef.style.display="none";
+   this.canvasRef.id="hexyCanvas";
+   this.canvasRef.style.width="100%";
+   this.canvasRef.style.display="none";
+
+   let domPolyOffset = this.props.radius + this.props.padding; 
+   for(let i = 0 ; i < 3;i++){
+      let rotation = 120 * i  + 90;
+      let IconPos = getRadialCoords(parseInt(domPolyOffset),parseInt(domPolyOffset),parseInt(this.props.radius),rotation );
+      this.iconStyleArray.push({
+        fontSize: '50px',
+        width: '50px',
+        position:'absolute',
+        top: '0px',
+        left: '0px',
+        transform: 'translate(' + (IconPos[0] - 25) + 'px,' + (IconPos[1] - 25) + 'px) scale(.5,.5)',
+        transformOrigin: "50% 50%",
+        zIndex: '-3',
+        textAlign: 'center',
+        opacity: 1
+      }) ;  
+
+    }
+    
+
   }
   
   handleMouseDown = () => {
@@ -292,7 +314,8 @@ static defaultProps = {
     //       fillColor="transparent" strokeColor="white" strokeWidth="0"
     //       />
     let canvasSize = 6 * this.props.radius;
-    
+   
+
     return ( 
        <div style={{ position: 'absolute', top: this.props.yPos + 'px' , left:  'calc(50% - ' + canvasSize/2 + 'px)' }} >  
         
@@ -311,6 +334,7 @@ static defaultProps = {
            icon="fa fa-times"
            key="1" 
            level="-3"
+           iconStyle = {this.iconStyleArray[0]}
            />
          
          <DD xx={domPolyOffset} yy={domPolyOffset}  radius={this.props.radius} rotation="150" offsetX="0" offsetY="0" 
@@ -326,6 +350,7 @@ static defaultProps = {
            icon="fa fa-twitter"
            key="2"
            level="-3"
+           iconStyle = {this.iconStyleArray[1]}
          />
          
          <DD xx={domPolyOffset} yy={domPolyOffset}  radius={this.props.radius} rotation="270" offsetX="0" offsetY="0" 
@@ -341,6 +366,7 @@ static defaultProps = {
            icon="fa fa-github"
            key="3"
            level="-3"
+           iconStyle = {this.iconStyleArray[2]}
          />
           <Poly xx={domPolyOffset} yy={domPolyOffset} sides="6" radius={4 * this.props.radius} rotation="0" offsetX="0" offsetY="0" scaleParent=".5"
            transformOriginX="50" transformOriginY="0" shadow="5" level="-5" listen={false} parentRef={this.regularPolyObject} name="backShadowPoly"

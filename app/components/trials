@@ -15,3 +15,21 @@
     // };
     
     <img ref="imagy" style={ styleImg }  src={ ImageSrc }/>
+
+    let domPolyOffset = this.props.radius + this.props.padding; 
+    for(i = 0 ; i < 3;i++){
+      let rotation = 120 * i  + 90;
+      let IconPos = getRadialCoords(parseInt(domPolyOffset),parseInt(domPolyOffset),parseInt(this.props.radius),rotation );
+      this.iconStyleArray[i] = {
+        fontSize: '50px',
+        width: '50px',
+        position:'absolute',
+        top: '0px',
+        left: '0px',
+        transform: 'translate(' + (IconPos[0] - 25) + 'px,' + (IconPos[1] - 25) + 'px) scale(.5,.5)',
+        transformOrigin: "50% 50%",
+        zIndex: '-3',
+        textAlign: 'center',
+        opacity: 1
+      };  
+    }

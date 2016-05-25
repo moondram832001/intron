@@ -42,9 +42,15 @@ static defaultProps = {
     transformOriginY : "50",
     scaleX: "1",
     scaleY: "1",
-    iconOpacity: 0
+    iconOpacity: 0,
+    pathData: 'M12.582,9.551C3.251,16.237,0.921,29.021,7.08,38.564l-2.36,1.689l4.893,2.262l4.893,2.262l-0.568-5.36l-0.567-5.359l-2.365,1.694c-4.657-7.375-2.83-17.185,4.352-22.33c7.451-5.338,17.817-3.625,23.156,3.824c5.337,7.449,3.625,17.813-3.821,23.152l2.857,3.988c9.617-6.893,11.827-20.277,4.935-29.896C35.591,4.87,22.204,2.658,12.582,9.551z',
+    pathDataArray: ['M12.582,9.551C3.251,16.237,0.921,29.021,7.08,38.564l-2.36,1.689l4.893,2.262l4.893,2.262l-0.568-5.36l-0.567-5.359l-2.365,1.694c-4.657-7.375-2.83-17.185,4.352-22.33c7.451-5.338,17.817-3.625,23.156,3.824c5.337,7.449,3.625,17.813-3.821,23.152l2.857,3.988c9.617-6.893,11.827-20.277,4.935-29.896C35.591,4.87,22.204,2.658,12.582,9.551z']
 };
 
+static propTypes = {
+ pathData: React.PropTypes.string,
+ pathDataArray : React.PropTypes.array
+};
 
 // handleMouseOver = () => {
 //     console.log("over");
@@ -268,20 +274,22 @@ componentWillMount(){
     };
     
     let IconPos = getRadialCoords(parseInt(this.props.xx),parseInt(this.props.yy),parseInt(this.props.radius),parseInt(this.props.rotation) + 60);
-    this.domIconProps = {
-        fontSize: '50px',
-        width: '50px',
-        position:'absolute',
-        top: '0px',
-        left: '0px',
-        transform: 'translate(' + (IconPos[0] - 25) + 'px,' + (IconPos[1] - 25) + 'px) scale(.5,.5)',
-        transformOrigin: "50% 50%",
-        //left: 300 - 25 + 'px',
-        //top: 200 - 25 + 'px',
-        zIndex: this.props.level,
-        textAlign: 'center',
-        opacity: this.props.iconOpacity
-    };
+    // this.domIconProps = {
+    //     fontSize: '50px',
+    //     width: '50px',
+    //     position:'absolute',
+    //     top: '0px',
+    //     left: '0px',
+    //     transform: 'translate(' + (IconPos[0] - 25) + 'px,' + (IconPos[1] - 25) + 'px) scale(.5,.5)',
+    //     transformOrigin: "50% 50%",
+    //     //left: 300 - 25 + 'px',
+    //     //top: 200 - 25 + 'px',
+    //     zIndex: this.props.level,
+    //     textAlign: 'center',
+    //     opacity: this.props.iconOpacity
+    // };
+
+    this.domIconProps = this.props.iconStyle;
     
     //TBD : need top remove this
     if(this.props.siblings){
@@ -315,13 +323,26 @@ render() {
     //             />
                 
  //           console.log(this.layerProps);
+
+   let ff = [];
+   ff.push(1);
     return(
         <div>
              <div ref="domParent" style={this.domParentProps}>
+
                 <div ref="domPoly" style={this.domPolyProps}></div>
+
              </div>
              <div ref="domParentOne" style={this.domParentProps}>
                 <div ref="domPolyOne" style={this.domPolyPropsOne}></div>
+                <svg width={this.props.width} height={this.props.height} viewBox="0 0 1000.000000 1000.000000">
+             <g transform="translate(100.000000,850.000000) scale(0.0350000,-0.0350000)"
+                fill="#000000" stroke="none">
+                  {this.props.pathDataArray.map(function(i,index){
+                      return <path d={i} fillOpacity={1} key={index} />
+                  })}
+              </g>  
+             </svg>
              </div>
              <div ref="domIcon" style={this.domIconProps}>
                  <i className={this.props.icon}></i>
@@ -362,6 +383,9 @@ render() {
                     strokeWidth={0}
                     />
              </Layer>
+             <div style={{position: 'absolute'}}>
+             
+             </div>
         </div>
     );
 }
