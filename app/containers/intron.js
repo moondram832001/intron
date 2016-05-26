@@ -8,7 +8,7 @@ import CC from '../components/CC'
 import Hexy from '../components/Hexy'
 import Cropper from 'cropperjs';
 import 'cropperjs';
-import 'cropperjs/dist/cropper.css';
+import '../styles/cropper.css';
 
 class Intron extends Component {
 
