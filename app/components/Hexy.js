@@ -74,6 +74,7 @@ static defaultProps = {
 
   componentDidUpdate(){
     console.log(" hexy was iupdated");
+
   }
   
   componentWillMount() {
@@ -157,21 +158,33 @@ static defaultProps = {
   }
   
   
-  handleMouseOver = (e) => {
-      let hslArray = rgbToHsl(255,0,0);
-      console.log("over",0);
-//      this.siblingsArray[0].refs.domPoly.style.WebkitFilter = "brightness(50%) sepia(1) hue-rotate("+ hslArray[0] +"deg) saturate(" + hslArray[1] + "%) brightness(" + hslArray[2] + "%)";
-   //   this.siblingsArray[0].refs.domPoly.style.WebkitFilter = "brightness(50%) sepia(1) hue-rotate(0deg) saturate(100%) brightness(90%)";
-       // this.siblingsArray[0].refs.domPolyOne.style.opacity = 1;
-      //  this.siblingsObject[this.props.key].refs.domPolyOne.style.opacity = 1;
+//   handleMouseOver = (e) => {
+//       let hslArray = rgbToHsl(255,0,0);
+//       console.log("over",0);
+// //      this.siblingsArray[0].refs.domPoly.style.WebkitFilter = "brightness(50%) sepia(1) hue-rotate("+ hslArray[0] +"deg) saturate(" + hslArray[1] + "%) brightness(" + hslArray[2] + "%)";
+//    //   this.siblingsArray[0].refs.domPoly.style.WebkitFilter = "brightness(50%) sepia(1) hue-rotate(0deg) saturate(100%) brightness(90%)";
+//        // this.siblingsArray[0].refs.domPolyOne.style.opacity = 1;
+//       //  this.siblingsObject[this.props.key].refs.domPolyOne.style.opacity = 1;
       
-  }
+//   }
   
-  handleMouseOut = (e) => {
-      console.log("out",e);
-     // this.siblingsArray[0].refs.domPolyOne.style.opacity = 0;
-     // this.siblingsObject[this.props.key].refs.domPolyOne.style.opacity = 0;
+//   handleMouseOut = (e) => {
+//       console.log("out",e);
+//      // this.siblingsArray[0].refs.domPolyOne.style.opacity = 0;
+//      // this.siblingsObject[this.props.key].refs.domPolyOne.style.opacity = 0;
+//   }
+
+handleMouseOverButton = () => {
+  if(!this.clickFlag){
+    document.body.style.cursor = 'pointer';
+  }else{
+    document.body.style.cursor = 'default';
   }
+}
+
+handleMouseOutButton = () => {
+    document.body.style.cursor = 'default';
+}
   
   
   handleStub = () => {
@@ -330,7 +343,7 @@ static defaultProps = {
            onClick={this.handleCloseClick}
            siblingsObject={this.siblingsObject}
            points={[0,0,100,0,50,86.6,-50,86.6]}
-           activeColor="#ff7777"
+           activeColor="#ccc"
            icon="fa fa-times"
            key="1" 
            level="-3"
@@ -346,7 +359,7 @@ static defaultProps = {
            onClick={this.handleStub}
            siblingsObject={this.siblingsObject}
            points={[0,0,100,0,50,86.6,-50,86.6]}
-           activeColor="#777"
+           activeColor="#ccc"
            icon="fa fa-twitter"
            key="2"
            level="-3"
@@ -362,7 +375,7 @@ static defaultProps = {
            siblings={this.siblingsArray}
            siblingsObject={this.siblingsObject}
            points={[0,0,100,0,50,86.6,-50,86.6]}
-           activeColor="#777"
+           activeColor="#ccc"
            icon="fa fa-github"
            key="3"
            level="-3"
@@ -375,6 +388,7 @@ static defaultProps = {
            <img ref="imagy" style={ styleImg }  src={ ImageSrc }/>
            <Poly xx={domPolyOffset} yy={domPolyOffset} sides="6" radius={2 * this.props.radius} rotation="0" offsetX="0" offsetY="0" parentRef={this.regularPolyObject}
            transformOriginX="50" transformOriginY="0" shadow="5" level="-2"  listen={true} name="frontButtonBackground" onClick={this.handleClick}
+           onMouseOver={this.handleMouseOverButton} onMouseOut={this.handleMouseOutButton}            
            fillColor="white" strokeColor="white" strokeWidth="0"
           />
       </Plat>

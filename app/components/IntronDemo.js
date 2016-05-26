@@ -27,6 +27,7 @@ class IntronDemo extends Component {
     this.intronCropperObject = {};
     this.domIconProps = {};
    // this.handleClick = 
+    this.renderCounter = 0;
 
   }
 
@@ -53,6 +54,18 @@ class IntronDemo extends Component {
         textAlign: 'center',
         opacity: 0
     };
+
+    this.headerStyle = {
+      marginLeft:'auto' ,
+      marginRight: 'auto',
+      width:"600px" ,
+      height: "100px" , 
+      textAlign: "center" ,
+      lineHeight: '100px' ,
+      fontFamily: 'monospace',
+      fontSize: "30px",
+      color: '#ccc'
+    };
   }
   
   componentDidMount() {
@@ -60,8 +73,16 @@ class IntronDemo extends Component {
   }
 
   componentDidUpdate() {
-     console.log("demo was updated");
+     console.log("demo was updated" ,this.renderCounter );
    //  this.refreshIntronImage();
+
+   if(this.renderCounter === 1){
+      this.refreshIntronImage();
+      
+   }
+  
+
+   this.renderCounter++;
   }
 
   componentWillReceiveProps(newProps) {
@@ -118,8 +139,10 @@ class IntronDemo extends Component {
                       preview: this.cropperObject.getCroppedCanvas()
                   });  
                 }
+
                  this.refreshIntronCount++;
           });
+      
   }
 
   handleClickIt() {
@@ -128,7 +151,7 @@ class IntronDemo extends Component {
 
   getPolaronImage(imageURL){
    //   this.polaronImage = imageURL;
-      console.log("i was run");
+   //   console.log("i was run");
       this.imagy = imageURL;
       this.setState({
    //       divBackground :  'url('+ this.polaronImage +')'  ,
@@ -149,12 +172,17 @@ class IntronDemo extends Component {
            width:'1300px',
            height: '1100px'
       };
+
+
    //   let platState = this.state.refresh;
     //let sampletag = this.renderCount === 0 ? <div>hello</div> : <Intron src={this.state.backy}></Intron>;
     let RenderComponent =  
               <div>      
                <div style={{ position: 'relative' , top: '0px',height: '100px', marginLeft: '0px' , marginTop: '0px' }}>
-            </div>     
+                 <div style={this.headerStyle}> 
+                    intron
+                 </div>
+               </div>     
               <div style={{ position: 'absolute' , top: '0px' , display :'none'}}>
                 <Polarons refresh={this.state.refresh} passToParent={this.getPolaronImage.bind(this)} ></Polarons>
               </div>
@@ -183,7 +211,7 @@ class IntronDemo extends Component {
                      MouseOut={this.handleMouseOut}
                      onClick={this.handleClick.bind(this)}
                      points={[0,0,300,0,300,100,50,100,0,50]}
-                     activeColor="#999"
+                     activeColor="#ccc"
                      level="-3"
                      iconOpacity={1}
                      iconStyle={this.domIconProps}
@@ -199,7 +227,7 @@ class IntronDemo extends Component {
                      MouseOut={this.handleMouseOut}
                      onClick={this.refreshIntronImage.bind(this)}
                      points={[0,0,300,0,300,50,250,100,0,100]}
-                     activeColor="#999"
+                     activeColor="#ccc"
                      level="-3"
                      iconOpacity={1}
                      iconStyle={this.domIconProps}

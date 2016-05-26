@@ -100,12 +100,14 @@ componentDidMount() {
           dragMode: 'none',
           minCropBoxWidth: 40,
           minCropBoxHeight: 40,
-          cropBoxResizable: true,
+          cropBoxResizable: false,
+          autoCropArea: .25,
   //        background: false,
           built: function () {
    //         croppable = true;
-   console.log(" i was buile afetr  mount");
+              console.log(" i was buile afetr  mount");
             //this.cropper.crop();
+            
           },
           crop: function(){
           //  console.log("cropped");
@@ -125,13 +127,13 @@ componentDidMount() {
       // }
       this.cropper = new Cropper(this.refs.img, options);
     //  console.log(this.cropper.getCropBoxData());
-      let cropRadius = 30;
-      this.cropper.setCropBoxData({
-        left: this.props.imageWidth/2 - cropRadius, 
-        top: this.props.imageHeight/2 - cropRadius, 
-        width: 2 * cropRadius,
-        height: 2 * cropRadius
-      });
+      // let cropRadius = 30;
+      // this.cropper.setCropBoxData({
+      //   left: this.props.imageWidth/2 - cropRadius, 
+      //   top: this.props.imageHeight/2 - cropRadius, 
+      //   width: 2 * cropRadius,
+      //   height: 2 * cropRadius
+      // });
 
       this.props.passToParent(this.cropper);
      
@@ -199,16 +201,18 @@ componentDidMount() {
       // }
       if(this.props.refreshImage){
          this.cropper.replace(this.props.src);  
+         
       }
+        // let cropRadius = 30;
+        // this.cropper.setCropBoxData({
+        //     left: 600/2 - cropRadius, 
+        //     top: 300/2 - cropRadius, 
+        //     width: 2 * cropRadius,
+        //     height: 2 * cropRadius
+        // });
       
     //  console.log(this.cropper.getCropBoxData());
-      // let cropRadius = 30;
-      // this.cropper.setCropBoxData({
-      //   left: this.props.imageWidth/2 - cropRadius, 
-      //   top: this.props.imageHeight/2 - cropRadius, 
-      //   width: 2 * cropRadius,
-      //   height: 2 * cropRadius
-      // });
+     
 
   }
 

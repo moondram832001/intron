@@ -88,7 +88,7 @@ class Polarons extends Component {
             <Layer ref="polaronRef">
                 {ff.map(function(i,index){
                     return i.map(function(j,jindex){
-                       return <Polaron key={index + "_" + jindex} xPos={j[1]  * 200} yPos={j[0] * 200}/>;
+                       return <Polaron key={index + "_" + jindex} xPos={j[1]  * 200 + 1} yPos={j[0] * 200}/>;
                     }) 
                 })}
             </Layer>

@@ -20,6 +20,7 @@ constructor(props) {
   this.domParentProps={};
   this.canBounds = {};
   this.scaleFactor = 2;
+ // this.clickFlag = false;
  // console.log(this.props);
 }
 
@@ -33,7 +34,9 @@ static defaultProps = {
     scaleX: "1",
     scaleY: "1",
     strokeColor: 'transparent',
-    strokeWidth: '0'
+    strokeWidth: '0',
+    onMouseOver: function(){},
+    onMouseOut: function(){}
 };
 
 
@@ -50,29 +53,29 @@ handleClick = () => {
     this.refs.domParent.style.transform = transformString;
 }
 
-handleMouseOver = () => {
- //   console.log("over");
+// handleMouseOver = () => {
+//  //   console.log("over");
     
-    let translateString = 'translate(' +  this.canBounds.x + 'px,' +  this.canBounds.y + 'px) ';
-    let rotateString = 'rotate('+ this.canPolyProps.roty + 'deg) ';
-    let scaleString = 'scale(' + (2 * this.props.scaleX) + ',' + (2 * this.props.scaleY) + ')';
-    let transformString = translateString + rotateString + scaleString;
+//     let translateString = 'translate(' +  this.canBounds.x + 'px,' +  this.canBounds.y + 'px) ';
+//     let rotateString = 'rotate('+ this.canPolyProps.roty + 'deg) ';
+//     let scaleString = 'scale(' + (2 * this.props.scaleX) + ',' + (2 * this.props.scaleY) + ')';
+//     let transformString = translateString + rotateString + scaleString;
     
-    this.refs.domScaler.style.transform = transformString;
-}
+//     this.refs.domScaler.style.transform = transformString;
+// }
 
-handleMouseOut = () => {
-  //console.log("out");
+// handleMouseOut = () => {
+//   //console.log("out");
     
-    //this.refs.domParent.style.transition= 'all .3s'; 
+//     //this.refs.domParent.style.transition= 'all .3s'; 
     
-    let translateString = 'translate(' +  this.canBounds.x + 'px,' +  this.canBounds.y + 'px) ';
-    let rotateString = 'rotate('+ this.canPolyProps.roty + 'deg) ';
-    let scaleString = 'scale(' + ( this.props.scaleX) + ',' + (this.props.scaleY) + ')';
-    let transformString = translateString + rotateString + scaleString;
+//     let translateString = 'translate(' +  this.canBounds.x + 'px,' +  this.canBounds.y + 'px) ';
+//     let rotateString = 'rotate('+ this.canPolyProps.roty + 'deg) ';
+//     let scaleString = 'scale(' + ( this.props.scaleX) + ',' + (this.props.scaleY) + ')';
+//     let transformString = translateString + rotateString + scaleString;
     
-    this.refs.domScaler.style.transform = transformString;
-}
+//     this.refs.domScaler.style.transform = transformString;
+// }
 
 
 // handleMouseDown = () => {
@@ -97,6 +100,15 @@ componentDidUpdate(){
     
     // console.log("updated");
 }
+
+handleMouseOver = () => {
+    document.body.style.cursor = 'pointer';
+}
+
+handleMouseOut = () => {
+//    document.body.style.cursor = 'default';
+}
+
 
 componentDidMount() {
  //   console.log(this.refs.def);
@@ -143,8 +155,8 @@ componentDidMount() {
     this.refs.def.node.draw();
     this.canBounds = this.refs.def.node.children[0].getClientRect();
    // console.log(this.canBounds , divBounds);
-    this.refs.domScaler.style.transition = 'all .3s';
-    this.refs.domParent.style.transitionDelay = '.5s';
+                // this.refs.domScaler.style.transition = 'all .3s';
+                // this.refs.domParent.style.transitionDelay = '.5s';
    // this.refs.def.node.children[0].rotate(this.canPolyProps.roty);
 
     this.domPolyProps = {
@@ -221,6 +233,9 @@ componentDidMount() {
         // BBB.refs.def.node.children[0].rotate(20);
         // BBB.refs.def.node.draw();
         // console.log(BBB.refs.def.node.children[0].getClientRect());
+
+         BBB.refs.domScaler.style.transition = 'all .3s';
+         BBB.refs.domParent.style.transitionDelay = '.5s';
     });
 
 }
@@ -291,6 +306,8 @@ render() {
                     sides={this.props.sides} radius={this.canPolyProps.rady} 
                     fill={this.canPolyProps.filler} x={this.canPolyProps.xPos} y={this.canPolyProps.yPos} opacity={this.canPolyProps.opacityValue}
                     onClick={this.props.onClick}
+                    onMouseOver={this.props.onMouseOver}
+                    onMouseOut={this.props.onMouseOut}
                     rotation={this.canPolyProps.roty}
                     offsetX={this.canPolyProps.offX}
                     offsetY={this.canPolyProps.offY} 

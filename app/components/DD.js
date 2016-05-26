@@ -96,12 +96,14 @@ static propTypes = {
 
 handleMouseOver = () => {
     this.refs.domPolyOne.style.opacity = 1;
+    document.body.style.cursor = 'pointer';
   //  this.refs.domIcon.style.textShadow = "0px 0px 10px #fff";
   //  this.refs.domIcon.style.color = "#fff";
 }
 
 handleMouseOut = () => {
     this.refs.domPolyOne.style.opacity = 0;
+    document.body.style.cursor = 'default';
 //    this.refs.domIcon.style.textShadow = "0px 0px 0px #fff";
 //    this.refs.domIcon.style.color = "#000";
 }
@@ -158,11 +160,11 @@ componentDidMount(){
     this.canBounds = this.refs.def.node.children[0].getClientRect();
   //  console.log(this.canBounds , divBounds);
    // this.refs.domScaler.style.transition = 'all .3s';
-   this.refs.domParent.style.transition = 'all 1s';
-   this.refs.domPoly.style.transition = 'all 1s';
-   this.refs.domPolyOne.style.transition = 'all .2s';
-   this.refs.domIcon.style.transition = 'all 1s';
-   this.refs.domParentOne.style.transition = 'all 1s';
+         // this.refs.domParent.style.transition = 'all 1s';
+         // this.refs.domPoly.style.transition = 'all 1s';
+         // this.refs.domPolyOne.style.transition = 'all .2s';
+         // this.refs.domIcon.style.transition = 'all 1s';
+         // this.refs.domParentOne.style.transition = 'all 1s';
  //  this.refs.domParentOne.style.transitionDelay = '.5s';
  //  this.refs.domPoly.style.transitionDelay = '.5s';
  //  this.refs.domParent.style.transitionDelay = '.5s';
@@ -252,6 +254,12 @@ componentDidMount(){
         // BBB.refs.def.node.children[0].rotate(20);
         // BBB.refs.def.node.draw();
         // console.log(BBB.refs.def.node.children[0].getClientRect());
+
+      BBB.refs.domParent.style.transition = 'all 1s';
+      BBB.refs.domPoly.style.transition = 'all 1s';
+      BBB.refs.domPolyOne.style.transition = 'all .2s';
+      BBB.refs.domIcon.style.transition = 'all 1s';
+      BBB.refs.domParentOne.style.transition = 'all 1s';
     });
     
 }
@@ -383,9 +391,6 @@ render() {
                     strokeWidth={0}
                     />
              </Layer>
-             <div style={{position: 'absolute'}}>
-             
-             </div>
         </div>
     );
 }
