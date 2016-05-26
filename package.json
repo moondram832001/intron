@@ -36,7 +36,8 @@
     "react-fontawesome": "^1.0.0",
     "react-konva": "^0.6.6",
     "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7"
+    "url-loader": "^0.5.7",
+    "express": "^4.13.3"
   },
   "devDependencies": {
     "babel-loader": "^6.2.3",
@@ -44,7 +45,6 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-react-hmre": "^1.1.0",
     "babel-preset-stage-0": "^6.3.13",
-    "express": "^4.13.3",
     "html-webpack-plugin": "^1.6.1",
     "extract-text-webpack-plugin": "^0.8.2",
     "css-loader": "^0.17.0",
