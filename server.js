@@ -11,6 +11,9 @@ const devMode = process.env.NODE_ENV !== 'production';
 const port = devMode ? 8080 : process.env.PORT;
 const app = express();
 
+console.log("devmode" , devMode);
+app.set('port', (process.env.PORT || 5000));
+
 if (devMode) {
   const compiler = webpack(config);
   const middleware = webpackMiddleware(compiler, {
@@ -39,9 +42,9 @@ if (devMode) {
   });
 }
 
-app.listen(port, function onStart(err) {
+app.listen(app.get('port'), function onStart(err) {
   if (err) {
     console.log(err);
   }
-  console.info('==> Listening on port %s.', port);
+  console.info('==> Listening on port %s.', app.get('port'));
 });
