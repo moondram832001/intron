@@ -12,7 +12,7 @@ const port = devMode ? 8080 : process.env.PORT;
 const app = express();
 
 console.log("devmode" , devMode);
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 8080));
 
 if (devMode) {
   const compiler = webpack(config);
