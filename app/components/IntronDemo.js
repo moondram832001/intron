@@ -67,6 +67,47 @@ class IntronDemo extends Component {
       fontSize: "30px",
       color: '#ccc'
     };
+    
+    this.nonChromeMessageHeader = {
+        position: 'absolute',
+        margin: 'auto',
+        top: '40%',
+        left: '0px',
+        right: '0px',
+        bottom: '0px',
+        width: '1000px',
+        color: 'rgb(45, 39, 39)',
+        fontFamily: 'monospace',
+        fontSize: '15px',
+        textAlign: 'center'
+    };
+    
+    let  isChrome = !!window.chrome;
+    let isChromium = window.chrome,
+    winNav = window.navigator,
+    vendorName = winNav.vendor,
+    isOpera = winNav.userAgent.indexOf("OPR") > -1,
+    isIEedge = winNav.userAgent.indexOf("Edge") > -1,
+    isIOSChrome = winNav.userAgent.match("CriOS");
+
+    if(isIOSChrome){
+       // is Google Chrome on IOS
+        this.setState({
+               display:true
+        });
+    } else if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
+       // is Google Chrome
+        this.setState({
+               display:true
+        });
+    } else { 
+       // not Google Chrome 
+        this.setState({
+               display:false
+           });
+        let spinner  = document.getElementById("spinner");
+        spinner.style.display = 'none';
+    }
   }
   
   componentDidMount() {
@@ -90,7 +131,7 @@ class IntronDemo extends Component {
   componentWillReceiveProps(newProps) {
  
   }
-
+  
   componentWillUnmount() {
 
     
@@ -195,7 +236,7 @@ class IntronDemo extends Component {
 
    //   let platState = this.state.refresh;
     //let sampletag = this.renderCount === 0 ? <div>hello</div> : <Intron src={this.state.backy}></Intron>;
-    let RenderComponent =  
+    let RenderComponent =  this.state.display ? 
               <div>      
                <div style={{ position: 'relative' , top: '0px',height: '100px', marginLeft: '0px' , marginTop: '0px' }}>
                  <div style={this.headerStyle}> 
@@ -264,6 +305,11 @@ class IntronDemo extends Component {
                 preview={this.state.preview} passToParent={this.getCropperObject.bind(this)}></Intron>
             </div>
             </div>
+            </div> : 
+            <div style={this.nonChromeMessageHeader}>
+                <h1>
+                    Please use google's chrome browser to view this demo
+                </h1>
             </div>
             ;
 
