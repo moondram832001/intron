@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import math from 'mathjs';
-import ReactKonva from './ReactKonva';
+//import ReactKonva from './ReactKonva';
+import ReactKonva from 'konva-react' ;
 
 let {Stage, Layer, Rect, Star, Group,Circle,Path,FastLayer} = ReactKonva;
 
@@ -15,7 +16,7 @@ class Polaron extends Component {
   }
 
   componentDidUpdate() {
-     console.log("polaron updated");
+ //    console.log("polaron updated");
   }
 
   componentWillReceiveProps(newProps) {

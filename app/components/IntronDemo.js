@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import ReactKonva from './ReactKonva';
+//import ReactKonva from './ReactKonva';
+import ReactKonva from 'konva-react' ;
 import Intron from '../containers/intron';
 import Polarons from '../components/Polarons';
 import Plat from '../components/Plat';
@@ -69,11 +70,12 @@ class IntronDemo extends Component {
   }
   
   componentDidMount() {
-     console.log("demo was mounted");
+ //    console.log("demo was mounted");
+  this.refs.imgy.style.display = 'none';
   }
 
   componentDidUpdate() {
-     console.log("demo was updated" ,this.renderCounter );
+ //    console.log("demo was updated" ,this.renderCounter );
    //  this.refreshIntronImage();
 
    if(this.renderCounter === 1){
@@ -97,23 +99,37 @@ class IntronDemo extends Component {
   }
   
   handleClick() {
-         console.log("clicked");
-          this.setState({
+      let spinner  = document.getElementById("spinner");
+      //spinner.style.display = 'block';
+      //let spinner  = document.getElementById("spinner");
+      //spinner.style.display = 'block';
+       this.refs.imgy.style.display = 'block';
+      
+      let intronRef = this;
+      setTimeout(function() {
+     //      console.log("clicked");
+  //your code to be executed after 1 second
+        intronRef.setState({
  //         divBackground :  'url('+ this.polaronImage +')'  ,
  //         backy : ,
-           refresh: true,
-           refreshImage: true
+          refresh: true,
+          refreshImage: true
           },function(){
-            console.log("after effects", this.clickCount);
-              if(!this.clickCount){
-                this.setState({
+     //       console.log("after effects", intronRef.clickCount);
+              if(!intronRef.clickCount){
+                intronRef.setState({
                   refresh: true,
                   refreshImage: true
                 });
               //  this.forceUpdate();
               }
-              this.clickCount++;
+             
+              intronRef.clickCount++;
           });
+}, 100);
+      
+      
+          
   }
 
   getCropperObject(cropperObject){
@@ -125,6 +141,7 @@ class IntronDemo extends Component {
    //  console.log("image refresher",this.cropperObject.getCroppedCanvas());
    //   this.cropperObject.crop();
       //this.cropper.crop();
+     
       this.setState({
  //         divBackground :  'url('+ this.polaronImage +')'  ,
  //         backy : ,
@@ -138,15 +155,17 @@ class IntronDemo extends Component {
                       refreshImage: false,
                       preview: this.cropperObject.getCroppedCanvas()
                   });  
+                  let spinner  = document.getElementById("spinner");
+                 spinner.style.display = 'none';
                 }
-
+                 
                  this.refreshIntronCount++;
           });
       
   }
 
   handleClickIt() {
-         console.log("clicked");
+  //       console.log("clicked");
   }
 
   getPolaronImage(imageURL){
@@ -162,7 +181,7 @@ class IntronDemo extends Component {
   }
 
   render() {
-      console.log(this.state , this.renderCount);
+   //   console.log(this.state , this.renderCount);
      
       let divStyle = {
            position: 'absolute',
@@ -183,6 +202,9 @@ class IntronDemo extends Component {
                     intron
                  </div>
                </div>     
+               <div ref="imgy" id="spinnerOne" style={{position: 'absolute' , display: 'block', margin: 'auto', top:'0px', left: '0px', right: '0px', bottom: '0px', width: '42px', height: '42px'}}>
+                    <img  src="https://res.cloudinary.com/moondram832001/image/upload/v1464856047/spinner_vubmdz.gif" height="42" width="42"></img>
+               </div> 
               <div style={{ position: 'absolute' , top: '0px' , display :'none'}}>
                 <Polarons refresh={this.state.refresh} passToParent={this.getPolaronImage.bind(this)} ></Polarons>
               </div>

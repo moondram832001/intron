@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 //import ReactDOM from 'react-dom'
-import ReactKonva from './ReactKonva';
+//import ReactKonva from './ReactKonva';
+import ReactKonva from 'konva-react' ;
 import Plat from './Plat';
 
 let {Stage, Layer, Rect, Star, Circle,RegularPolygon} = ReactKonva;
@@ -41,7 +42,7 @@ static defaultProps = {
 
 
 handleClick = () => {
-    console.log("clicked");
+  //  console.log("clicked");
     
     this.refs.domParent.style.transition= 'all .3s'; 
     
@@ -241,7 +242,7 @@ componentDidMount() {
 }
 
 componentWillMount(){
-    console.log("will mount");
+ //   console.log("will mount");
     this.canPolyProps = {
         sides : this.props.sides,
         opacityValue : 1,

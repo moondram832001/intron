@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import ReactKonva from './ReactKonva';
+//import ReactKonva from './ReactKonva';
+import ReactKonva from 'konva-react' ;
 
 let {Stage, Layer, Rect, Star, Circle,RegularPolygon} = ReactKonva;
 
@@ -14,7 +15,7 @@ class Plat extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    console.log(newProps);
+ //   console.log(newProps);
   }
 
   componentWillUnmount() {
@@ -23,7 +24,7 @@ class Plat extends Component {
 
 
   shouldComponentUpdate(){ 
-      console.log(this.props);
+   //   console.log(this.props);
       return this.props.refresh;
       // return true;
   }

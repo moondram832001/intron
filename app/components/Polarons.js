@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import ReactKonva from './ReactKonva';
+//import ReactKonva from './ReactKonva';
+import ReactKonva from 'konva-react' ;
 import Polaron from '../components/Polaron'
 
 let {Stage, Layer, Rect, Star, Circle,RegularPolygon} = ReactKonva;

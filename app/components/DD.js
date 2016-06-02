@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 //import ReactDOM from 'react-dom'
-import ReactKonva from './ReactKonva';
+//import ReactKonva from './ReactKonva';
+import ReactKonva from 'konva-react' ;
 import Plat from './Plat';
 import FontAwesome from 'react-fontawesome';
 import {getRadialCoords} from './Utils';

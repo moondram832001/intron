@@ -105,7 +105,9 @@ componentDidMount() {
   //        background: false,
           built: function () {
    //         croppable = true;
-              console.log(" i was buile afetr  mount");
+   //           console.log(" i was buile afetr  mount");
+              let spinner  = document.getElementById("spinnerOne");
+              spinner.style.display = 'none';
             //this.cropper.crop();
             
           },
@@ -167,7 +169,7 @@ componentDidMount() {
 
   componentDidUpdate() {
   //  console.log(this.refs.polaronRef.node.getCanvas());
-    console.log("intron updated");
+   // console.log("intron updated");
   //     var intronRef = this;
 
   //     var options = {

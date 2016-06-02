@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import ReactKonva from './ReactKonva';
+//import ReactKonva from './ReactKonva';
+import ReactKonva from 'konva-react' ;
 import Plat from './Plat';
 import DD from './DD';
 import Poly from './Poly';
@@ -57,7 +58,7 @@ static defaultProps = {
   }
 
   componentWillReceiveProps(newProps) {
-    console.log(" hexy was woken" , this.props.src);
+//    console.log(" hexy was woken" , this.props.src);
   }
 
   componentWillUnmount() {
@@ -73,7 +74,7 @@ static defaultProps = {
   }
 
   componentDidUpdate(){
-    console.log(" hexy was iupdated");
+  //  console.log(" hexy was iupdated");
 
   }
   
@@ -131,11 +132,11 @@ static defaultProps = {
 //       this.clickFlag = 1;
 //       }
       
-      console.log("down down");
+  //    console.log("down down");
   }
   
   handleMouseUp = () => {
-      console.log("out out");
+  //    console.log("out out");
     // if(this.clickFlag){
     //     this.siblingsArray.map(function(sibling){
     //     let translateString = "translate(" + '0' +"px,"+ '0' +"px)";
@@ -299,6 +300,25 @@ handleMouseOutButton = () => {
      
       
   }
+  
+  handleTwitterClick = () => {
+      var win = window.open('https://twitter.com/', '_blank');
+        if(win){
+            win.focus();
+        }else{
+            alert('Please allow popups for this site');
+        }
+  }
+  
+  handleGithubClick = () => {
+      var win = window.open('https://github.com/', '_blank');
+        if(win){
+            win.focus();
+        }else{
+            alert('Please allow popups for this site');
+        }
+  }
+  
 
   render() {
      let {width,height,src} = this.props;
@@ -356,7 +376,7 @@ handleMouseOutButton = () => {
            MouseDown={this.handleMouseDown}
            MouseUp={this.handleMouseUp}
            siblings={this.siblingsArray}
-           onClick={this.handleStub}
+           onClick={this.handleTwitterClick}
            siblingsObject={this.siblingsObject}
            points={[0,0,100,0,50,86.6,-50,86.6]}
            activeColor="#ccc"
@@ -371,7 +391,7 @@ handleMouseOutButton = () => {
            MouseOut={this.handleMouseOut}
            MouseDown={this.handleMouseDown}
            MouseUp={this.handleMouseUp}
-           onClick={this.handleStub}
+           onClick={this.handleGithubClick}
            siblings={this.siblingsArray}
            siblingsObject={this.siblingsObject}
            points={[0,0,100,0,50,86.6,-50,86.6]}

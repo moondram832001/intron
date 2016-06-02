@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 //import Konva from 'konva'
 
 //import {Layer, Rect, Stage, Group, Shape,Transform} from 'react-konva';
-import ReactKonva from './ReactKonva';
+//import ReactKonva from './ReactKonva';
+import ReactKonva from 'konva-react' ;
 import {getPolygonCanvas} from './Utils';
 
 let {Stage, Layer, Rect, Shape, Group,Circle,Path,FastLayer} = ReactKonva;
